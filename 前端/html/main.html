@@ -1,0 +1,600 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Hello APP</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            display: flex;
+            display: -webkit-flex;
+            display: -webkit-box;
+            flex-flow: column;
+            -webkit-flex-flow: column;
+            -webkit-box-orient: vertical;
+        }
+
+        .gambit_head {
+            width: 100%;
+            height: 43px;
+            display: flex;
+            display: -webkit-flex;
+            display: -webkit-box;
+            flex-flow: row;
+            -webkit-flex-flow: row;
+            -webkit-box-orient: horizontal;
+            background-color: #fff;
+            position: relative;
+            box-sizing: border-box;
+            padding-left: 43px;
+            padding-right: 43px;
+            border-bottom: 1px solid #d8d8d8;
+        }
+
+        .gambit_menu {
+            flex: 1;
+            -webkit-flex: 1;
+            -webkit-box-flex: 1;
+            height: 43px;
+            line-height: 43px;
+            box-sizing: border-box;
+            color: #222;
+            font-size: 15px;
+        }
+
+        .gambit_recommend {
+            text-align: center;
+        }
+
+        .gambit_recommend .list {
+            height: 40px;
+            display: inline-block;
+        }
+
+        .gambit_recommend .em2 {
+            margin-left: 50px;
+        }
+
+        .gambit_login {
+            width: 43px;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-image: url(../image/gambit/icn_login.png);
+            background-size: 16px 19px;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        .gambit_seek {
+            width: 56px;
+            height: 100%;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+
+        .header {
+            height: 43px;
+            width: 100%;
+            display: none;
+            line-height: 43px;
+        }
+
+        .header.active {
+            display: block;
+        }
+
+        .top-menu {
+            padding: 0 43px 0 8px;
+        }
+        /*按钮*/
+
+        .btn {
+            height: 40px;
+            width: 35px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+        /*首页头部导航*/
+        /*字体颜色*/
+
+        .header.home>div.active {
+            opacity: 1;
+        }
+
+        .header.home {
+            background: #d43d3d;
+        }
+
+        .header.home .top-menu>div {
+            color: #fff;
+            opacity: .8;
+        }
+
+        .header.home .top-menu>div.active {
+            opacity: 1;
+        }
+
+        .add_btn {
+            background: #d43d3d url('../image/head/add.png') center center no-repeat;
+            -webkit-background-size: 38px 43px;
+            background-size: 38px 43px;
+        }
+        /*视频头部导航*/
+
+        .header.video,
+        .header.topic {
+            background-color: #fff;
+            color: #333;
+        }
+
+        .header.my {
+            height: 0;
+        }
+
+        .content {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+        }
+
+        .search-video-btn {
+            width: 41px;
+            height: 43px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: url('../image/head/sc.png') center center no-repeat;
+            -webkit-background-size: 41px 43px;
+            background-size: 41px 43px;
+        }
+
+        .gambit_menu>div.active {
+            border-bottom: 2px solid #d43d3d;
+        }
+
+        .content {
+            -webkit-flex: 1px;
+            flex: 1px;
+            -webkit-box-flex: 1;
+            background-color: #f4f5f6;
+        }
+
+        .footer {
+            height: 44px;
+            display: flex;
+            display: -webkit-flex;
+            display: -webkit-box;
+            flex-flow: row;
+            -webkit-flex-flow: row;
+            -webkit-box-orient: horizontal;
+            background-color: #f4f5f6;
+        }
+
+        .menu {
+            flex: 1;
+            -webkit-flex: 1;
+            -webkit-box-flex: 1;
+            height: 44px;
+            box-sizing: border-box;
+            padding-bottom: 5px;
+            padding-top: 27px;
+            color: #585858;
+            font-size: 10px;
+            text-align: center;
+            background-size: 22px 22px;
+            background-position: center 5px;
+            background-repeat: no-repeat;
+        }
+
+        .footer .home {
+            background-image: url(../image/footer/home.png);
+        }
+
+        .footer .video {
+            background-image: url(../image/footer/video.png);
+        }
+
+        .footer .gambit {
+            background-image: url(../image/footer/gambit.png);
+        }
+
+        .footer .my {
+            background-image: url(../image/footer/my.png);
+        }
+
+        .footer .home.active {
+            background-image: url(../image/footer/home_act.png);
+        }
+
+        .footer .video.active {
+            background-image: url(../image/footer/video_act.png);
+        }
+
+        .footer .gambit.active {
+            background-image: url(../image/footer/gambit_act.png);
+        }
+
+        .footer .my.active {
+            background-image: url(../image/footer/my_act.png);
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <div class="header home active">
+            <div class="top-menu"></div>
+            <div class="add_btn btn" tapmode onclick="fnMore()"></div>
+        </div>
+        <div class="header video">
+            <div class="top-menu"></div>
+            <div class="search-video-btn" tapmode onclick="fnSearch();"></div>
+        </div>
+        <div class="header topic gambit_head">
+            
+            <div class="gambit_menu gambit_recommend" id="top-menu">
+                <div class="list active" tapmode onclick="changeStyle(0)">动态</div>
+                <div class="list em2" tapmode onclick="changeStyle(1)">云顶</div>
+            </div>
+            <div class="gambit_seek" tapmode onclick="fnOpenThemeChoose();">写动态</div>
+        </div>
+        <div class="header my"></div>
+    </header>
+    <section class="content"></section>
+    <footer id="footer" class="footer">
+        <div class="menu home active " tapmode="active" onclick="fnChange(0)">新闻</div>
+        <div class="menu video" tapmode="active" onclick="fnChange(1)">视频</div>
+        <div class="menu gambit" tapmode="active" onclick="fnChange(2)">广场</div>
+        <div class="menu my" tapmode="active" onclick="fnChange(3)">我的</div>
+    </footer>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        fnInit();
+        fnChange(0);
+        fnInitListener();
+    };
+
+    function fnInitListener() {
+        api.addEventListener({
+            name: 'keyback'
+        }, function(ret, err) {
+            api.historyBack(function(ret, err) {
+                if (ret.status) {} else {
+                    api.closeWidget();
+
+                }
+            });
+
+        });
+    };
+
+    function changeStyle(index) {
+        var topMenu = $api.byId('top-menu');
+        var divs = $api.domAll(topMenu, 'div');
+        api.setFrameGroupIndex({
+            name: frameNames[2],
+            index: index,
+            scroll: true
+        });
+        for (var i = 0; i < divs.length; i++) {
+            if (i == index) {
+                $api.addCls(divs[i], 'active');
+            } else {
+                $api.removeCls(divs[i], 'active');
+            }
+        }
+    }
+    var menus, headers, headerHeight, footerHeight, headerTop;
+    var navigationBar, home_group_id, video_group_id;
+
+    function fnInit() {
+        var header = $api.byId('header');
+        var footer = $api.byId('footer');
+        menus = $api.domAll(footer, '.menu');
+        headers = $api.domAll(header, '.header');
+        footerHeight = $api.offset(footer).h;
+
+        for (var i = 0; i < headers.length; i++) {
+            $api.fixIos7Bar(headers[i]);
+        }
+
+        var offset = $api.offset(header);
+        headerHeight = offset.h;
+        headerTop = offset.t;
+
+        navigationBar = api.require('navigationBar');
+    };
+
+    var frameNames = ['home_group', 'video_group', 'topics_group', 'my_frame'];
+
+    function fnChange(index) {
+        for (var i = 0; i < menus.length; i++) {
+            if (index == i) {
+                $api.addCls(menus[i], 'active');
+                $api.addCls(headers[i], 'active');
+                switch (i) {
+                    case 3:
+                        fnOpenFrame(i, true);
+                        break;
+                    case 2:
+                        fnOpenFrameGroup(i, true);
+                        break;
+                    default:
+                        fnOpenFrameGroup(i, true);
+                        fnNavigationBar(i, true);
+                        break;
+                }
+            } else {
+                $api.removeCls(menus[i], 'active');
+                $api.removeCls(headers[i], 'active');
+                switch (i) {
+                    case 3:
+                        fnOpenFrame(i, false);
+                        break;
+                    case 2:
+                        fnOpenFrameGroup(i, false);
+                        break;
+                    default:
+                        fnOpenFrameGroup(i, false);
+                        fnNavigationBar(i, false);
+                        break;
+                }
+            }
+        }
+    };
+
+    function fnOpenFrame(index, isOpen) {
+        if (isOpen) {
+            api.openFrame({
+                name: frameNames[index],
+                url: './' + frameNames[index] + '.html',
+                bounces: false,
+                rect: {
+                    x: 0,
+                    y: 0,
+                    w: 'auto',
+                    h: api.winHeight - footerHeight
+                },
+                vScrollBarEnabled: false,
+                pageParam: {
+                    footer: footerHeight
+                }
+            });
+        } else {
+            api.setFrameAttr({
+                name: frameNames[index],
+                hidden: true
+            });
+        }
+    };
+
+    var home_group = {
+            item: [{
+                title: '云顶',
+                bg: '#d43d3d',
+            }, {
+                title: '腾讯',
+                bg: '#d43d3d',
+            }, {
+                title: '新浪',
+                bg: '#d43d3d',
+            }, {
+                title: '网易',
+                bg: '#d43d3d',
+            }, {
+                title: '搜狐',
+                bg: '#d43d3d',
+            }, {
+                title: '果壳',
+                bg: '#d43d3d',
+            }, {
+                title: '知乎',
+                bg: '#d43d3d',
+            }],
+            font: {
+                color: '#efb7b7',
+                colorSelected: '#fff',
+                size: 15,
+                sizeSelected: 15
+            },
+            itemSize: {
+                w: 60
+            }
+        },
+        video_group = {
+            item: [{
+                title: '全网VIP视频',
+                bg: '#d43d3d',
+            }],
+            font: {
+                color: '#efb7b7',
+                colorSelected: '#fff',
+                size: 20,
+                sizeSelected: 15
+            },
+            itemSize: {
+                w: 350
+            }
+        };
+
+    var currentIndex = 0;
+
+
+    function fnNavigationBar(index, isOpen) {
+        if (isOpen) {
+            currentIndex = index;
+            if (typeof window[frameNames[index] + '_id'] == 'undefined') {
+                navigationBar.open({
+                    y: headerTop,
+                    w: api.winWidth - 40,
+                    h: headerHeight - headerTop,
+                    itemSize: window[frameNames[index]].itemSize,
+                    items: window[frameNames[index]].item,
+                    font: window[frameNames[index]].font,
+                    selectedIndex: 0
+                }, function(ret, err) {
+                    var a = ret.index
+                    api.addEventListener({
+                        name: 'keyback'
+                    }, function(ret, err) {
+                        var js = 'api.historyBack(function(ret, err){if(ret.status){}else{api.closeWidget();}});';
+                        api.execScript({
+                            //name:api.winName,
+                            frameName: 'home_frame_' + a,
+                            //frameName: api.pageParam.mFrameName,
+                            script: js
+                        });
+                    });
+                    switch (ret.eventType) {
+                        case 'show':
+                            window[frameNames[currentIndex] + '_id'] = ret.id;
+                            break;
+                        case 'click':
+                            api.setFrameGroupIndex({
+                                name: frameNames[currentIndex],
+                                index: ret.index,
+                                scroll: true
+                            });
+                            break;
+                    }
+                });
+            } else {
+                navigationBar.show({
+                    id: window[frameNames[index] + '_id']
+                });
+            }
+        } else {
+            if (typeof window[frameNames[index] + '_id'] != 'undefined') {
+                navigationBar.hide({
+                    id: window[frameNames[index] + '_id']
+                });
+            }
+        }
+    };
+    var home_group_frames = [],
+        video_group_frames = [];
+    urls = ['./home_frame.html', 'https://xw.qq.com/', 'https://sina.cn/', 'https://3g.163.com/', 'https://m.sohu.com/', 'https://m.guokr.com/scientific/', 'https://www.zhihu.com/']
+    for (var i = 0; i < home_group.item.length; i++) {
+        home_group_frames.push({
+            name: 'home_frame_' + i,
+            url: urls[i],
+            useWKWebView: true,
+            vScrollBarEnabled: false,
+            pageParam: {
+                type: home_group.item[i].title
+            }
+        });
+    };
+
+    for (var i = 0; i < video_group.item.length; i++) {
+        video_group_frames.push({
+            name: 'video_group_' + i,
+            url: 'video_frame.html',
+            vScrollBarEnabled: false,
+            pageParam: {
+                type: '视频',
+                childType: video_group.item[i].title
+            }
+        });
+    };
+
+    var topics_group_frames = [{
+        name: 'recommentlist_frame',
+        url: './recommentlist_frame.html',
+        vScrollBarEnabled: false
+    }, {
+        name: 'themelist_frame',
+        url: './themelist_frame.html',
+        vScrollBarEnabled: false
+    }];
+
+    function fnOpenFrameGroup(index, isOpen) {
+        if (isOpen) {
+            currentIndex = index;
+            api.openFrameGroup({
+                name: frameNames[index],
+                scrollEnabled: false,
+                rect: {
+                    x: 0,
+                    y: headerHeight,
+                    w: 'auto',
+                    h: api.winHeight - headerHeight - footerHeight
+                },
+                index: 0,
+                frames: window[frameNames[index] + '_frames']
+            }, function(ret, err) {
+                if (currentIndex < 2) {
+                    navigationBar.config({
+                        id: window[frameNames[currentIndex] + '_id'],
+                        key: 'selectedIndex',
+                        value: ret.index
+                    });
+                } else {
+                    changeStyle(ret.index);
+                }
+            });
+        } else {
+            api.setFrameGroupAttr({
+                name: frameNames[index],
+                hidden: true
+            });
+        }
+    };
+
+    function fnOpenThemeChoose() {
+        api.getPrefs({
+                key: 'loginStatus'
+            }, function(ret, err) {
+                var val = ret.value;
+                if (val && val != "") {
+                    api.openWin({
+                        name: 'dynamic_publishing',
+                        url: 'dynamic_publishing.html',
+
+                    });
+                } else {
+                    alert("请先登陆");
+
+                }
+            });
+        }
+
+        function fnLogin() {
+            api.openWin({
+                name: 'login_choose',
+                url: './login_choose.html'
+            });
+        }
+        // 搜索
+        function fnSearch() {
+            api.openWin({
+                name: 'search_home',
+                url: 'search_home.html'
+            });
+        }
+        // more
+        function fnMore() {
+            api.openWin({
+                name: 'more',
+                url: './more.html',
+                animation: {
+                    type: "none",
+                    subType: "from_right",
+                    duration: 100
+                }
+            });
+        }
+</script>
+
+</html>

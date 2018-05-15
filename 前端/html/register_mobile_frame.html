@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>main</title>
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <style type="text/css">
+
+    </style>
+</head>
+
+<body>
+    <p class="aui-padded-10 aui-text-center">验证码发送测试</p>
+    <div class="aui-card">
+        <div class="aui-form">
+            <div class="aui-input-row">
+                <span class="aui-input-addon">手机号</span>
+                <input type="number" id="phone" value="" class="aui-input" placeholder="填写手机号码" />
+            </div>
+            <div class="aui-btn-row">
+                <a class="aui-btn aui-btn-success" tapmode onclick="sms()">发送短信验证码</a>&nbsp;&nbsp;
+                <a class="aui-btn aui-btn-primary" tapmode onclick="voice()">发送语音验证码</a>
+            </div>
+        </div>
+    </div>
+
+    <p class="aui-padded-10 aui-text-center">验证码校验测试</p>
+    <div class="aui-card">
+        <div class="aui-form">
+            <div class="aui-input-row">
+                <span class="aui-input-addon">验证码</span>
+                <input type="number" id="code" value="" class="aui-input" placeholder="填写收到的验证码" />
+            </div>
+            <div class="aui-btn-row">
+                <a class="aui-btn aui-btn-info" tapmode onclick="verify()">校验验证码</a>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    var smsVerify = null;
+    apiready = function() {
+        smsVerify = api.require('smsVerify');
+
+        // 初始化
+        register();
+    };
+
+    // 注册，初始化
+    function register() {
+        smsVerify.register(function(ret, err) {
+            if (ret.status) {
+                //api.alert({msg: '注册成功'});
+                console.log('注册成功');
+            } else {
+                api.alert({
+                    msg: err.code + ' 注册失败'
+                });
+            }
+        });
+    }
+
+    // 发短信验证码
+    function sms() {
+        var phone = document.getElementById("phone").value;
+        var ip = api.getPrefs({
+            sync: true,
+            key: 'IP'
+        });
+        api.ajax({
+            url: ip + 'phone',
+            method: 'post',
+            timeout: 5,
+            dataType: 'json',
+            returnAll: false,
+            data: {
+                body: JSON.stringify({
+                    'type': '0',
+                    'phone': phone,
+                })
+            }
+        }, function(ret, err) {
+            if (ret.status == 'sucess') {
+                smsVerify.sms({
+                    phone: phone,
+                }, function(ret, err) {
+                    if (ret.status) {
+                        // 新增的安卓智能验证功能
+                        if (ret.smart == true) { // 安卓版特有功能 智能验证成功
+                            api.openWin({
+                                name: 'register_mobile_sumit',
+                                url: './register_mobile_submit.html',
+                                pageParam: {
+                                    'phone': phone,
+                                }
+
+                            });
+                        } else {
+                            api.alert({
+                                msg: '短信发送成功'
+                            });
+                        }
+                    } else {
+                        api.alert({
+                            msg: ' 短信发送失败'
+                        });
+                    }
+                });
+            } else if (ret.status == "fail") {
+                api.alert({
+                    msg: '该手机号已注册'
+                });
+            } else {
+                api.alert({
+                    msg: '网络出错啦'
+                });
+            }
+        });
+
+    }
+
+    // 发语音验证码
+    function voice() {
+        var phone = document.getElementById("phone").value;
+        api.ajax({
+            url: 'http://192.168.31.159:8000/phone',
+            method: 'post',
+            timeout: 5,
+            dataType: 'json',
+            returnAll: false,
+            data: {
+                body: JSON.stringify({
+                    'type': '0',
+                    'phone': phone,
+                })
+            }
+        }, function(ret, err) {
+            if (ret.status == 'sucess') {
+                smsVerify.voice({
+                    phone: phone,
+                }, function(ret, err) {
+                    if (ret.status) {
+                        api.alert({
+                            msg: '语音发送成功'
+                        });
+                    } else {
+                        api.alert({
+                            msg: err.code + ' 语音发送失败'
+                        });
+                    }
+                });
+            } else if (ret.status == "fail") {
+                api.alert({
+                    msg: '该手机号已注册'
+                });
+            } else {
+                api.alert({
+                    msg: '网络出错啦'
+                });
+            }
+        });
+    }
+
+    // 校验验证码
+    function verify() {
+        var phone = document.getElementById("phone").value;
+        var code = document.getElementById("code").value;
+        smsVerify.verify({
+            phone: phone,
+            code: code,
+        }, function(ret, err) {
+            if (ret.status) {
+                api.openWin({
+                    name: 'register_mobile_sumit',
+                    url: './register_mobile_submit.html',
+                    pageParam: {
+                        'phone': phone,
+                    }
+
+                });
+            } else {
+                api.alert({
+                    msg: err.code + ' 验证失败'
+                });
+            }
+        });
+    }
+</script>
+
+</html>

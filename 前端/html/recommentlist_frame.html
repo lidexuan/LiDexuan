@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .swipe {
+            overflow: hidden;
+            visibility: hidden;
+            position: relative;
+            padding-bottom: 16px;
+        }
+
+        .swipe-wrap {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .swipe-wrap>div {
+            float: left;
+            width: 100%;
+            position: relative;
+        }
+
+        #swipeIndicator {
+            position: absolute;
+            left: 50%;
+            bottom: 0px;
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
+
+        #swipeIndicator li {
+            height: 16px;
+            line-height: 16px;
+            width: 16px;
+            float: left;
+            background: url(../image/gambit/dian.png) no-repeat center center;
+            background-color: transparent;
+            background-size: 4px 4px;
+        }
+
+        #swipeIndicator li.active {
+            background: url(../image/gambit/dian_act.png) no-repeat center center;
+            background-color: transparent;
+            background-size: 4px 4px;
+        }
+
+        .slide_1 {
+            height: 97px;
+            width: 100%;
+        }
+
+        .slide_p1 {
+            width: 25%;
+            height: 97px;
+            float: left;
+            box-sizing: border-box;
+            padding-bottom: 5px;
+            padding-top: 83px;
+            color: #999;
+            font-size: 9px;
+            text-align: center;
+            background-size: 60px 60px;
+            background-position: center 17px;
+            background-repeat: no-repeat;
+        }
+
+        .slide_1 .pic4 {
+            background-image: url(../image/gambit/pic4.png);
+        }
+
+        .slide_1 .pic5 {
+            background-image: url(../image/gambit/pic5.png);
+        }
+
+        .slide_1 .pic6 {
+            background-image: url(../image/gambit/pic6.png);
+        }
+
+        .slide_1 .pic77 {
+            background-image: url(../image/gambit/pic7.png);
+        }
+
+        .sky {
+            width: 100%;
+            height: 10px;
+            background-color: #f4f5f6;
+            border-top: 1px solid #e8e8e8;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .content1,
+        .content2,
+        .content3 {
+            box-sizing: border-box;
+            padding: 0 15px;
+        }
+
+        .section {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .title {
+            font-size: 16px;
+            color: #444;
+            line-height: 20px;
+            padding-top: 1rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .pic_ul {
+            display: flex;
+            display: -webkit-flex;
+            display: -webkit-box;
+            flex-flow: row;
+            -webkit-flex-flow: row;
+            -webkit-box-orient: horizontal;
+        }
+
+        .pic {
+            flex: 1;
+            -webkit-flex: 1;
+            -webkit-box-flex: 1;
+            box-sizing: border-box;
+        }
+
+        .content2 .pic {
+            flex: 1;
+            -webkit-flex: 1;
+            -webkit-box-flex: 1;
+            box-sizing: border-box;
+        }
+
+        .content2 .pic img {
+            width: 50%;
+            display: block;
+        }
+
+        .content3 .pic img {
+            width: 100%;
+            display: block;
+        }
+
+        .pic img {
+            width: 100%;
+            display: block;
+        }
+
+        .pic7 {
+            padding: 0 6px;
+        }
+
+        .text {
+            color: #888;
+            font-size: 12px;
+            position: relative;
+            padding-bottom: 8px;
+            line-height: 38px;
+        }
+
+        .icon {
+            position: absolute;
+            top: 0px;
+            right: 6px;
+            width: 37px;
+            height: 38px;
+            text-align: right;
+            box-sizing: border-box;
+            background-image: url(../image/gambit/icn2.png);
+            background-size: 18px 16px;
+            background-repeat: no-repeat;
+            background-position: left center;
+        }
+
+        .zan {
+            position: absolute;
+            top: 0px;
+            right: 62px;
+            width: 32px;
+            height: 38px;
+            text-align: right;
+            box-sizing: border-box;
+            background-image: url(../image/gambit/icn1.png);
+            background-size: 18px 16px;
+            background-repeat: no-repeat;
+            background-position: left center;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 0px;
+            right: 6px;
+            width: 37px;
+            height: 38px;
+            text-align: right;
+            box-sizing: border-box;
+            background-image: url(../image/gambit/icn2.png);
+            background-size: 18px 16px;
+            background-repeat: no-repeat;
+            background-position: left center;
+        }
+
+        .title em {
+            color: #406599;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="swipe" class="swipe">
+        <ul id="swipeIndicator">
+        </ul>
+    </div>
+
+</body>
+<script id="template" type="text/template">
+    {{~ it.datas:data }} {{? data.number==3}}
+    <div class="sky"></div>
+    <div class="content1">
+        <div class="section">
+            <div class="title"><em></em> {{=data.text}}</div>
+            <div class="pic_ul">
+                <div class="pic">
+                    <img src="{{=data.picture}}" alt="">
+                </div>
+                <div class="pic pic7">
+                    <img src="{{=data.picture}}" alt="">
+                </div>
+                <div class="pic">
+                    <img src="{{=data.picture}}" alt="">
+                </div>
+            </div>
+            <div class="text">
+                <div>{{=data.nickname}} {{=data.publish_time}}</div>
+                <div class="zan">{{=data.zan}}</div>
+                <div class="arrow">{{=data.comment}}</div>
+            </div>
+        </div>
+    </div>
+    {{?? data.number==1}}
+    <div class="sky"></div>
+    <div class="content2">
+        <div class="section">
+            <div class="title"><em></em> {{=data.text}}</div>
+            <div class="pic_ul">
+                <div class="pic">
+                    <img src="http://192.168.31.159:8000/{{=data.picture}}" alt="">
+                </div>
+            </div>
+            <div class="text">
+                <div>{{=data.nickname}} {{=data.publish_time}}</div>
+                <div class="zan">{{=data.zan}}</div>
+                <div class="arrow">{{=data.comment}}</div>
+            </div>
+        </div>
+    </div>
+    {{?? data.number==2}}
+    <div class="sky"></div>
+    <div class="content3">
+        <div class="section">
+            <div class="title"><em></em>{{=data.text}}</div>
+            <div class="pic_ul">
+                <div class="pic">
+                    <img src="{{=data.picture}}" alt="">
+                </div>
+                <div class="pic pic7">
+                    <img src="{{=data.picture}}" alt="">
+                </div>
+            </div>
+            <div class="text">
+                <div>{{=data.nickname}} {{=data.publish_time}}</div>
+                <div class="zan">{{=data.zan}}</div>
+                <div class="arrow">{{=data.comment}}</div>
+            </div>
+        </div>
+    </div>
+    {{?}} {{~}}
+</script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/swipe.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        fnChange();
+        fnInitPull();
+        fninit();
+        headList(progress, isPull);
+        fnInitPushRefresh();
+    };
+    var headlist, dot;
+    var dataLoading = false,
+        isEmpty = false,
+        skip = 0,
+        LIMIT = 5,
+        progress = true,
+        isPull = true;
+
+    function fnInitPull() {
+        api.setRefreshHeaderInfo({
+            visible: true,
+            loadingImg: 'widget://image/refresh.png',
+            bgColor: '#f0f0f0',
+            textColor: '#888',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...',
+            showTime: true
+        }, function(ret, err) {
+            api.refreshHeaderLoadDone();
+            headList(progress, true);
+        });
+    };
+
+    function fninit() {
+        headlist = $api.byId('swipe');
+        var template = $api.byId('template');
+        dot = doT.template(template.innerHTML);
+    };
+
+    function headList(progress, isPull) {
+        if (dataLoading) {
+            return;
+        }
+        dataLoading = true;
+
+        if (isPull) {
+            skip = 0;
+            isEmpty = false;
+        }
+
+        if (isEmpty) {
+            api.toast({
+                msg: '没有更多了',
+                duration: 2000,
+                location: 'bottom'
+            });
+            dataLoading = false;
+            return;
+        }
+        if (progress) {
+            api.showProgress({
+                title: '加载中',
+                modal: false
+            });
+        }
+
+
+        var ip = api.getPrefs({
+            sync: true,
+            key: 'IP'
+        });
+
+        api.ajax({
+            url: ip + 'square',
+            method: 'get',
+            timeout: 5,
+            returnAll: false,
+            dataType: 'json',
+
+        }, function(ret, err) {
+            api.hideProgress();
+            api.refreshHeaderLoadDone();
+            dataLoading = false;
+            if (!ret) {
+                api.toast({
+                    msg: '网络不给力',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                return;
+            }
+
+            skip += LIMIT;
+            if (ret.length < LIMIT) {
+                isEmpty = true;
+            }
+
+            if (ret.length == 0) {
+                return;
+            }
+            if (isPull) {
+                headlist.innerHTML = dot(ret);
+            } else {
+                headlist.innerHTML += dot(ret);
+            }
+        })
+    };
+
+    function fnInitPushRefresh() {
+
+        api.addEventListener({
+            name: 'scrolltobottom',
+            extra: {
+                threshold: 200
+            }
+        }, function(ret, err) {
+
+            headList(progress, false);
+        });
+    };
+
+    function fnChange() {
+        var swipe = $api.byId('swipe'),
+            swipeIndicator = $api.byId('swipeIndicator'),
+            indicators = $api.domAll(swipeIndicator, 'li');
+
+        new Swipe(swipe, {
+            auto: 3000,
+            callback: function(index) {
+                for (var i = 0; i < indicators.length; i++) {
+                    if (index == i) {
+                        $api.addCls(indicators[i], 'active');
+                    } else {
+                        $api.removeCls(indicators[i], 'active');
+                    }
+                }
+            }
+        });
+    }
+</script>
+
+</html>

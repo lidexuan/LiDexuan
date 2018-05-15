@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+        <title>ad</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <style type="text/css">
+            html,
+            body {
+                height: 100%;
+            }
+
+            .content .section {
+                width: 100%;
+                box-sizing: border-box;
+                border-bottom: 1px solid #e8e8e8;
+            }
+
+            .content .pic img {
+                width: 100%;
+                display: block;
+                margin: 0 auto;
+            }
+
+            .content .pic p {
+                font-size: 24px;
+                color: #fff;
+                display: block;
+                margin-top: -34px;
+                margin-left: 12px;
+            }
+
+            .content .pic span {
+                  color: #000;
+                  font-size: 24px;
+                  /*font-weight: bold;*/
+                  display: block;
+                  margin-top: -30px;
+                  margin-left: 10px;
+            }
+
+            .kye {
+                height: 20px;
+                width: 100%;
+                background-color: #f4f5f6;
+                border-bottom: 1px solid #e8e8e8;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="content">
+            <div class="section">
+                <div class="pic" tapmode onclick="fnPlay()">
+                    <img src="../image/front/iOS.png" alt="">
+                    <p>IOS俱乐部</p>
+                </div>
+            </div>
+            <div class="kye"></div>
+            <div class="section">
+                <div class="pic" tapmode onclick="fnPlay()">
+                    <img src="../image/front/front-end.jpg" alt="">
+                    <p>前端组</p>
+                </div>
+            </div>
+            <div class="kye"></div>
+            <div class="section">
+                <div class="pic" tapmode onclick="fnPlay()">
+                    <img src="../image/front/back-stage.png" alt="">
+                    <span>后台组</span>
+                </div>
+            </div>
+            <div class="kye"></div>
+            <div class="section">
+                <div class="pic">
+                    <img src="../image/front/design.png" alt="">
+                    <p>设计组</p>
+                </div>
+            </div>
+            <div class="kye"></div>
+            <div class="section">
+                <div class="pic" tapmode onclick="fnPlay()">
+                    <img src="../image/front/vis.png" alt="">
+                    <p>视觉组</p>
+                </div>
+            </div>
+            <div class="kye"></div>
+            <div class="section">
+                <div class="pic" tapmode onclick="fnPlay()">
+                    <img src="../image/front/safety.png" alt="">
+                    <p>信息安全团队</p>
+                </div>
+            </div>
+            <div class="kye"></div>
+            <div class="section">
+                <div class="pic" tapmode onclick="fnPlay()">
+                    <img src="../image/front/mobile.png" alt="">
+                    <p>移动互联</p>
+                </div>
+            </div>
+            <div class="kye"></div>
+            <div class="section">
+                <div class="pic" tapmode onclick="fnPlay()">
+                    <img src="../image/front/visual-intro.png" alt="">
+                    <span>云顶视觉各组简介</span>
+                </div>
+            </div>
+            <div class="kye"></div>
+            <div class="section">
+                <div class="pic" tapmode onclick="fnPlay()">
+                    <img src="../image/front/internet-intro.png" alt="">
+                    <span>云顶网络各组简介</span>
+                </div>
+            </div>
+            <div class="kye"></div>
+        </div>
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript">
+        var videoPlayer;
+        apiready = function() {
+            videoPlayer = api.require('videoPlayer');
+        };
+
+        function fnPlay() {
+            var videoPlayer = api.require('videoPlayer');
+            videoPlayer.play({
+                texts: {
+                    head: {
+                        title: 简介
+                    }
+                },
+                styles: {
+                    head: {
+                        bg: 'rgba(0.5,0.5,0.5,0.7)',
+                        height: 44,
+                        titleSize: 16,
+                        titleColor: '#fff',
+                        backSize: 20,
+                         backImg: 'fs://img/back.png',
+                        setSize: 20,
+                        setImg: 'fs://img/set.png'
+                    },
+
+                },
+                path: 'http://resource.apicloud.com/video/apicloud3.mp4',
+                autoPlay: true
+            });
+        }
+    </script>
+
+</html>

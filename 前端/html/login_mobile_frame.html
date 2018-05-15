@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            background-color: #f4f5f6;
+        }
+
+        .login_box {
+            box-sizing: border-box;
+            padding: 30px 20px;
+        }
+
+        .phone {
+            width: 100%;
+            height: 43px;
+            line-height: 43px;
+            border: 1px solid #e8e8e8;
+            background-color: #fff;
+        }
+
+        .phone input,
+        .password input {
+            width: 100%;
+            height: 43px;
+            line-height: 16px;
+            outline: none;
+            font-size: 14px;
+            color: #999;
+            box-sizing: border-box;
+            padding-left: 10px;
+        }
+
+        .password {
+            width: 100%;
+            height: 43px;
+            border: 1px solid #e8e8e8;
+            border-top: none;
+            background-color: #fff;
+            position: relative;
+        }
+
+        .find {
+            width: 80px;
+            height: 43px;
+            line-height: 43px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            background-image: url(../image/my/line.png);
+            background-repeat: no-repeat;
+            background-size: 1px 14px;
+            background-position: left center;
+        }
+
+        .login {
+            width: 100%;
+            height: 44px;
+            line-height: 44px;
+            text-align: center;
+            font-size: 13px;
+            color: #fff;
+            border-radius: 4px;
+            background-color: #999;
+            margin: 20px 0 10px;
+        }
+
+        .register {
+            width: 100%;
+            height: 44px;
+            line-height: 44px;
+            text-align: center;
+            font-size: 13px;
+            color: #2a90d7;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login_box">
+        <div class="phone">
+            <input type="text" placeholder="手机号" id="tel">
+        </div>
+        <div class="password">
+            <input type="password" placeholder="密码" id="password">
+            <div class="find" tapmode onclick="fnForgetPassword()">找回密码</div>
+        </div>
+        <div class="login" tapmode onclick="fnLogin()">登录</div>
+        <div class="register open-win" win="register_mobile">注册账号</div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript" src="../script/SHA1.js"></script>
+<script type="text/javascript" src="../script/request.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        fnInit();
+        fnReady();
+
+    };
+
+    var tel, password, emailText,username;
+    var now = Date.now();
+    var appKey1 = SHA1("A6918573369588" + "UZ" + "20C93719-0DE5-8C9B-2F05-36D9BB835C02" + "UZ" + now) + "." + now;
+    var appKey = '20C93719-0DE5-8C9B-2F05-36D9BB835C02';
+
+    function fnInit() {
+        username = $api.byId('tel');
+        password = $api.byId('password');
+    };
+
+        //被register_frame.html调用
+        function fnSetEmail(email) {
+            window.tel.value = tel;
+        };
+
+        function fnLogin() {
+           emailText = username.value,
+           passwordText = password.value;
+           api.showProgress({
+            title: '登录中',
+            modal: true
+        });
+           fnPost('', {
+            body: JSON.stringify({
+                username: emailText,
+                password: passwordText
+            })
+        }, 'application/json', function(ret, err) {
+          if (ret.status=="sucess") {
+              $api.setStorage('loginInfo', ret);
+              api.setPrefs({
+                  key: 'userID',
+                  value: ret.userID
+              });
+              api.execScript({
+                  name:'main',
+                  frameName: 'my_frame',
+                  script:'loginMobile("'+ret.nick_name+'");'
+              });
+              api.closeWin();
+          } else if (ret.status=='fail'){
+               alert("账号或密码错误")
+            }else {
+              api.alert({ msg: JSON.stringify(err) })
+            }
+        });
+       };
+
+       function fnPost(path, data, contentType, callback) {
+        api.showProgress({
+            title: '验证中',
+            modal: true
+        });
+
+        var headers = {
+            "X-APICloud-AppId": "A6918573369588",
+            "X-APICloud-AppKey": appKey1
+        };
+        var ip = api.getPrefs({
+            sync: true,
+            key: 'IP'
+          });
+
+        if (contentType) {
+            headers["Content-Type"] = contentType
+        }
+        api.ajax({
+            url: ip + path,
+            method: 'post',
+            timeout: 5,
+            dataType: 'json',
+            returnAll: false,
+            headers: headers,
+            data: data
+        }, function(ret, err) {
+            api.hideProgress();
+            callback(ret, err);
+        });
+    };
+
+    function fnForgetPassword() {
+        api.openWin({
+            name: 'forget_password',
+            url: 'forget_password.html',
+            bounces: false,
+            pageParam: {
+                key: 'value'
+            }
+        });
+    }
+    function fnChange(userName){
+        username.value=userName;
+    }
+</script>
+
+</html>

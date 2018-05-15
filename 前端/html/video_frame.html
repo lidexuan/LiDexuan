@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>ad</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+        }
+
+        .content .section {
+            width: 100%;
+            box-sizing: border-box;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .content .pic img {
+            width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .content .footer {
+            color: #888;
+            font-size: 12px;
+            position: relative;
+            padding-left: 45px;
+            padding-right: 54px;
+            height: 40px;
+            line-height: 40px;
+            box-sizing: border-box;
+        }
+
+        .content .icon {
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            top: 8px;
+            left: 15px;
+        }
+
+        .content .icon img {
+            width: 24px;
+        }
+
+        .content .txt {
+            width: 100%;
+            color: #222;
+            font-size: 12px;
+        }
+
+        .content .txt em {
+            float: right;
+            color: #a7a7a7;
+        }
+
+        .content .txt .zan {
+            width: 36px;
+            margin-left: 17px;
+            text-align: right;
+            font-size: 10px;
+            color: #9e9e9e;
+            background-image: url(../image/video/icn1.png);
+            background-size: 18px 16px;
+            background-repeat: no-repeat;
+            background-position: left center;
+        }
+
+        .content .arrow {
+            position: absolute;
+            bottom: 0px;
+            right: 10px;
+            width: 31px;
+            height: 40px;
+            box-sizing: border-box;
+            background-image: url(../image/video/icn2.png);
+            background-size: 17px 3px;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        .kye {
+            height: 10px;
+            width: 100%;
+            background-color: #f4f5f6;
+            border-bottom: 1px solid #e8e8e8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="section">
+            <div class="pic" tapmode onclick="fnPlay('http://www.iqiyi.com/v_19rr7plwdc.html?fc=b3604d2dd54c307f')">
+                <img src="../image/video/video1.png" alt="">
+            </div>
+            <div class="footer">
+                <div class="icon">
+                    <img src="../image/video/video.png" alt="">
+                </div>
+                <div class="txt">红海行动</div>
+            </div>
+        </div>
+        <div class="kye"></div>
+        <div class="section">
+            <div class="pic" tapmode onclick="fnPlay('http://www.iqiyi.com/v_19rr7q6q0k.html?fc=b3604d2dd54c307f#vfrm=19-9-0-1')">
+                <img src="../image/video/video2.png" alt="">
+            </div>
+            <div class="footer">
+                <div class="icon">
+                    <img src="../image/video/video.png" alt="">
+                </div>
+                <div class="txt">小萝莉和他的猴神大叔</div>
+            </div>
+        </div>
+        <div class="kye"></div>
+        <div class="section">
+            <div class="pic" tapmode onclick="fnPlay('http://www.iqiyi.com/v_19rr839kro.html?fc=b3604d2dd54c307f#vfrm=19-9-0-1')">
+                <img src="../image/video/video3.png" alt="">
+            </div>
+            <div class="footer">
+                <div class="icon">
+                    <img src="../image/video/video.png" alt="">
+                </div>
+                <div class="txt">唐人街探案2</div>
+            </div>
+        </div>
+        <div class="kye"></div>
+        <div class="section">
+            <div class="pic" tapmode onclick="fnPlay('http://www.iqiyi.com/v_19rrfkek9w.html?fc=b3604d2dd54c307f#vfrm=19-9-0-1')">
+                <img src="../image/video/video4.png" alt="">
+            </div>
+            <div class="footer">
+                <div class="icon">
+                    <img src="../image/video/video.png" alt="">
+                </div>
+                <div class="txt">灵魂摆渡黄泉</div>
+            </div>
+        </div>
+        <div class="kye"></div>
+        <div class="section">
+            <div class="pic" tapmode onclick="fnPlay('http://www.iqiyi.com/v_19rr7pgevk.html?fc=b3604d2dd54c307f#vfrm=19-9-0-1')">
+                <img src="../image/video/video5.png" alt="">
+            </div>
+            <div class="footer">
+                <div class="icon">
+                    <img src="../image/video/video.png" alt="">
+                </div>
+                <div class="txt">心理罪之城市之光</div>
+            </div>
+        </div>
+        <div class="kye"></div>
+        <div class="section">
+            <div class="pic" tapmode onclick="fnPlay('http://www.iqiyi.com/v_19rr7pj5bc.html?fc=b3604d2dd54c307f#vfrm=19-9-0-1')">
+                <img src="../image/video/video6.png" alt="">
+            </div>
+            <div class="footer">
+                <div class="icon">
+                    <img src="../image/video/video.png" alt="">
+                </div>
+                <div class="txt">英伦对决</div>
+            </div>
+        </div>
+        <div class="kye"></div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    var videoPlayer;
+    apiready = function() {
+        videoPlayer = api.require('videoPlayer');
+    };
+
+    function fnPlay(path) {
+        var browser = api.require('webBrowser');
+        browser.open({
+            url: 'http://www.vipjiexi.com/tong.php?url=' + path,
+            titleBar: {
+                visible: true,
+
+                textColor: 'rgb'
+
+            }
+        });
+    }
+</script>
+
+</html>

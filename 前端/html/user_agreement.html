@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+        <title>云顶在线首页</title>
+        <link rel="stylesheet" type="text/css" href="./css/api.css" />
+        <style type="text/css">
+            html,
+            body {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-box-orient: vertical;
+                -webkit-flex-flow: column;
+                flex-flow: column;
+                height: 100%;
+                background-color: #F8F8F8;
+            }
+
+            #nav {
+                height: 45px;
+                border-bottom: 1px solid #C9C9C9;
+                line-height: 45px;
+                text-align: center;
+            }
+
+            .back {
+                height: 45px;
+                width: 45px;
+                background: url('../image/shouye/back-black.png') no-repeat;
+                -webkit-background-size: 18px 18px;
+                background-size: 18px 18px;
+                background-position: center center;
+                display: inline-block;
+                float: left;
+                z-index: 999;
+            }
+
+            .more {
+                height: 45px;
+                width: 45px;
+                display: inline-block;
+                position: absolute;
+                right: 0;
+                background: url('../image/shouye/more.png') 20px no-repeat;
+                background-position: center center;
+            }
+
+            .content {
+                -webkit-box-flex: 1;
+                -webkit-flex: 1;
+                flex: 1;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="nav">
+            <!-- <div class="title"></div> -->
+            <div class="back" tapmode onclick="api.closeWin();"></div>
+            云顶在线用户协议
+            <div class="more"></div>
+        </div>
+        <div class="content"></div>
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+            fnInit();
+            fnOpenFrame();
+        };
+        var head, headHeight;
+
+        function fnInit() {
+            header = $api.byId('nav');
+            headerHeight = $api.offset(header).h;
+        }
+
+        function fnOpenFrame() {
+            api.openFrame({
+                name: 'user_agreement_frame',
+                url: './user_agreement_frame.html',
+                bounces: true,
+                rect: {
+                    x: 0,
+                    y: headerHeight,
+                    w: 'auto',
+                    h: api.winHeight - headerHeight
+                },
+                vScrollBarEnabled:false
+            });
+        }
+    </script>
+
+</html>

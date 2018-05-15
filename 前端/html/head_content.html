@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>今日头条首页</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style type="text/css">
+        html,
+        body {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-flex-flow: column;
+            flex-flow: column;
+            height: 100%;
+            background-color: #F8F8F8;
+        }
+
+        .nav {
+            width: 100%;
+            height: 43px;
+            background-color: #fafafa;
+            border-bottom: 1px solid #b4b4b4;
+        }
+
+        .nav .arrow {
+            float: left;
+            width: 43px;
+            height: 43px;
+            background-image: url(../image/head/arrow.png);
+            background-size: 11px 20px;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        .nav .share {
+            float: right;
+            width: 43px;
+            height: 43px;
+            background-image: url(../image/head/share.png);
+            background-size: 19px 3px;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        .content {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+        }
+
+        .footer {
+            width: 100%;
+            height: 37px;
+            background-color: #f4f5f6;
+            box-sizing: border-box;
+            padding-left: 16px;
+            padding-right: 155px;
+            position: relative;
+            border-top: 1px solid #b4b4b4;
+        }
+
+        .footer .input {
+            width: 100%;
+            height: 28px;
+            line-height: 28px;
+            border-radius: 14px;
+            background-color: #fff;
+            color: #7c7c7c;
+            font-size: 12px;
+            box-sizing: border-box;
+            padding-left: 13px;
+            margin-top: 4px;
+        }
+
+        .footer .box {
+            position: absolute;
+            right: 7px;
+            bottom: 0;
+            width: 129px;
+            height: 37px;
+        }
+
+        .footer .icn {
+            float: left;
+            height: 37px;
+        }
+
+        .footer .comment {
+            width: 41px;
+            background-image: url(../image/head/comment.png);
+            background-size: 32px 24px;
+            background-repeat: no-repeat;
+            background-position: center 4px;
+        }
+
+        .footer .collect2 {
+            width: 37px;
+            background-image: url(../image/head/collect2.png);
+            background-size: 21px 20px;
+            background-repeat: no-repeat;
+            background-position: center 8px;
+            margin: 0 6px;
+        }
+
+        .footer .share2 {
+            width: 37px;
+            background-image: url(../image/head/share2.png);
+            background-size: 19px 19px;
+            background-repeat: no-repeat;
+            background-position: center 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav" id="nav">
+        <div class="arrow" tapmode onclick="api.closeWin();"></div>
+        <div class="share" tapmode onclick="actionMenu()"></div>
+    </div>
+    <div class="content">
+    </div>
+    <footer class="footer" id=footer>
+        <div class="input">写评论...</div>
+        <div class="box">
+            <div class="icn collect2" tapmode onclick='fnCollect2()'></div>
+
+        </div>
+    </footer>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        fnInit();
+        skipContent();
+
+    };
+    var nav, navHeight, footHeight, foot;
+
+    function fnCollect2() {
+        alert("收藏成功")
+    }
+
+    function fnInit() {
+        nav = $api.byId('nav');
+        $api.fixIos7Bar(nav);
+        foot = $api.byId('footer')
+        navHeight = $api.offset(nav).h;
+        footHeight = $api.offset(foot).h;
+    }
+
+    function skipContent() {
+        api.openFrame({
+            name: 'head_content_frame',
+            url: './head_content_frame.html',
+            vScrollBarEnabled: false,
+            bounces: false,
+            rect: {
+                x: 0,
+                y: navHeight,
+                w: 'auto',
+                h: api.winHeight - navHeight - footHeight
+            }
+        });
+    }
+</script>
+
+</html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            background-color: #f0f0f0;
+        }
+
+        .h10 {
+            height: 10px;
+            background: #f4f5f6;
+            border-top: 1px solid #e8e8e8;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .h1 {
+            height: 1px;
+            margin-left: 15px;
+            background: #f0f0f0;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        .hint {
+            color: #666;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+
+        .firstblock,
+        .secondblock,
+        .thirdblock {
+            background-color: #fff;
+        }
+
+        .login {
+            position: relative;
+        }
+
+        .login .text {
+            width: 100px;
+            height: 28px;
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            margin-left: -50px;
+            background-image: url(../image/my/lg.png);
+            background-repeat: no-repeat;
+            background-size: 100px 24px;
+            background-position: center center;
+        }
+
+        //设置登录后的头像样式
+        #user {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        #user .qqLogin {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            margin-top: -90px;
+        }
+
+        #user .userIcon {
+            height: 59px;
+            width: 59px;
+            margin: 30px auto 10px;
+        }
+
+        #user .userIcon img {
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        #user .userName {
+            height: 30px;
+            width: 100%;
+            margin-top: 5px;
+            line-height: 30px;
+            font-size: 16px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .loginbg {
+            width: 100%;
+        }
+
+        .logins {
+            width: 100%;
+            height: 35%;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            box-sizing: border-box;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        .login_pic {
+            height: 100%;
+            width: 25%;
+            float: left;
+            background-size: 80%;
+            background-position: center top;
+            background-repeat: no-repeat;
+        }
+
+        .logins .tel {
+            background-image: url(../image/my/tel.png);
+        }
+
+        .logins .wx {
+            background-image: url(../image/my/wx.png);
+        }
+
+        .logins .qq {
+            background-image: url(../image/my/qq.png);
+        }
+
+        .logins .wb {
+            background-image: url(../image/my/wb.png);
+        }
+
+        .my_content {
+            height: 64px;
+            display: flex;
+            display: -webkit-flex;
+            display: -webkit-box;
+            flex-flow: row;
+            -webkit-flex-flow: row;
+            -webkit-box-orient: horizontal;
+            background-color: #fff;
+        }
+
+        .cont {
+            flex: 1;
+            -webkit-flex: 1;
+            -webkit-box-flex: 1;
+            height: 64px;
+            box-sizing: border-box;
+            padding-bottom: 10px;
+            padding-top: 42px;
+            color: #505050;
+            font-size: 10px;
+            text-align: center;
+            background-position: center 9px;
+            background-repeat: no-repeat;
+        }
+
+        .my_content .collect {
+            border-right: 1px solid #e8e8e8;
+            background-size: 23px 22px;
+            background-image: url(../image/my/collect.png);
+        }
+
+        .my_content .night {
+            border-right: 1px solid #e8e8e8;
+            background-size: 22px 22px;
+            background-image: url(../image/my/night.png);
+        }
+
+        .my_content .set {
+            background-size: 23px 23px;
+            background-image: url(../image/my/set.png);
+        }
+
+        .person_arrow {
+            position: absolute;
+            height: 20px;
+            right: 10px;
+            top: 90px;
+        }
+
+        .item {
+            height: 50px;
+            line-height: 50px;
+            padding-left: 15px;
+            background-color: #fff;
+        }
+
+        .item_arrow {
+            float: right;
+            width: 6px;
+            padding: 17px 15px 15px 0;
+        }
+
+        .item-hov {
+            background-color: #E8E8E8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login">
+        <img src="../image/my/my_bg.png" class="loginbg">
+        <div id="user">
+            <div class="logins">
+                <div class="login_pic tel" tapmode onclick="fnTel()"></div>
+                <div class="login_pic wx" tapmode onclick="fnwx()"></div>
+                <div class="login_pic qq" tapmode onclick="fnSlipeToQq();"></div>
+                <div class="login_pic wb"></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="my_content">
+        <div class="cont collect" tapmode onclick="fnFavorite()">收藏</div>
+        <div class="cont night">夜间</div>
+        <div class="cont set" tapmode onclick="fnSet()">设置</div>
+    </div>
+    <div class="h10"></div>
+    <div class="firstblock">
+        <div class="item" tapmode="item-hov" onclick="fnDynamic()">
+            好友动态
+            <img src="../image/my/arrow.png" class="item_arrow">
+        </div>
+    </div>
+    <div class="h10"></div>
+    <div class="secondblock">
+        <div class="item" tapmode="item-hov" onclick="fnInform()">
+            通知
+            <img src="../image/my/arrow.png" class="item_arrow">
+        </div>
+        <div class="h1"></div>
+        <div class="item" tapmode="item-hov" tapmode onclick="fnOffline()">
+            历史记录
+            <img src="../image/my/arrow.png" class="item_arrow">
+        </div>
+        <div class="h1"></div>
+        <div class="item" tapmode="item-hov" onclick="fnActivity()">
+            活动
+            <img src="../image/my/arrow.png" class="item_arrow">
+        </div>
+        <div class="h1"></div>
+        <div class="item" tapmode="item-hov" onclick="fnShop()">
+            商城 <em <link style="font-size:10px; color:#999;">特卖，电影</em>
+            <img src="../image/my/arrow.png" class="item_arrow">
+        </div>
+        <div class="h1"></div>
+        <div class="item" tapmode="item-hov" onclick="fnDisclose()">
+            待开发
+            <img src="../image/my/arrow.png" class="item_arrow">
+        </div>
+        <div class="h1"></div>
+        <div class="item" tapmode="item-hov" onclick="fnOpenTickling();">
+            待开发
+            <img src="../image/my/arrow.png" class="item_arrow">
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/SHA1.js"></script>
+<script type="text/javascript" src="../script/APICloud-rest.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+
+        api.addEventListener({
+            name: 'logoutSuccess'
+        }, function(ret, err) {
+            if (ret) {
+                var user = $api.byId('user');
+                user.innerHTML =
+                    '<div class="logins"><div class="login_pic tel" tapmode onclick="fnTel()"></div><div class="login_pic wx" tapmode onclick="fnwx()"></div><div class="login_pic qq" tapmode onclick="fnSlipeToQq();"></div><div class="login_pic wb"></div></div></div>'
+            }
+        });
+    };
+
+    function fnwx() {
+        //api.getPrefs获取当前登录状态
+        api.getPrefs({
+            key: 'loginStatus'
+        }, function(ret, err) {
+            //当偏好设置尚未设置或者曾设置后被移除后，返回值(ret.value)均为空。
+            var val = ret.value;
+            if (val && val != "") {
+                alert("denglula ")
+            } else {
+                alert("qingdenglu")
+            }
+        });
+
+    }
+
+    function fnTel() {
+        api.openWin({
+            name: 'login_mobile',
+            url: './login_mobile.html',
+        });
+    }
+
+    function fnFavorite() {
+        api.openWin({
+            name: 'favorite',
+            url: './favorite.html',
+        });
+    }
+
+    function fnSet() {
+        api.openWin({
+            name: 'setting',
+            url: './setting.html',
+        });
+    }
+
+    function fnOffline() {
+        api.openWin({
+            name: 'offline',
+            url: './offline.html',
+        });
+    }
+
+    function fnMorelogin() {
+        api.openWin({
+            name: 'login_choose',
+            url: './login_choose.html'
+        });
+    }
+
+    function fnOpenTickling() {
+        api.openWin({
+            name: 'tickling',
+            url: './tickling.html',
+            bounces: false
+        });
+    }
+    var qq;
+
+    function fnSlipeToQq() {
+        qq = api.require('qq');
+        qq.login(function(ret, err) {
+            if (ret.status) {
+                var where = {
+                        qqId: ret.openId
+                    },
+                    qqId = ret.openId;
+                fnGet('user', where, 0, 1, function(ret, err) {
+                    fnCheckUser(ret, err, where.qqId)
+                });
+            }
+
+        });
+    }
+    var now = Date.now();
+    var appKey1 = SHA1("A6918573369588" + "UZ" + "20C93719-0DE5-8C9B-2F05-36D9BB835C02" + "UZ" + now) + "." + now;
+    var appKey = '20C93719-0DE5-8C9B-2F05-36D9BB835C02';
+
+    function fnGet(tab, where, skip, LIMIT, callback) {
+        api.showProgress({
+            title: '加载中',
+            modal: true
+        });
+        var url = 'https://d.apicloud.com/mcm/api/' + tab + '?filter={"where":' + JSON.stringify(where) + ',"skip":' + skip + ',"limit":' + LIMIT + '}';
+
+        var headers = {
+            "X-APICloud-AppId": "A6918573369588",
+            "X-APICloud-AppKey": appKey1
+        }
+        api.ajax({
+            url: url,
+            method: 'get',
+            timeout: 5,
+            dataType: 'json',
+            headers: headers
+        }, callback)
+    };
+
+    function fnCheckUser(user, err, qqId) {
+
+        var username = qqId,
+            password = '000000';
+        if (user.length) {
+            fnLoginFrom(username, password, qqId);
+        } else {
+            api.hideProgress();
+            fnRegister(username, password, qqId);
+        }
+    }
+
+    function fnLoginFrom(usernameValue, password, qqId) {
+        fnPost('user/login', {
+            body: JSON.stringify({
+                username: usernameValue,
+                password: password,
+                qqId: qqId
+            })
+        }, 'application/json', function(ret, err) {
+            if (ret && ret.id) {
+
+                $api.setStorage('loginInfo', ret);
+                qq.getUserInfo(function(ret, err) {
+                    if (ret.status) {
+                        fnsetUser(ret.info.nickname, ret.info.figureurl_qq_2);
+                    } else {
+                        api.alert({
+                            msg: err.msg
+                        });
+                    }
+                });
+
+            } else {
+                alert('用户名或密码错误');
+            }
+        });
+    }
+
+    function fnRegister(userName, password, qqId) {
+        var emailText = userName,
+            passwordText = password;
+        api.showProgress({
+            title: '注册中',
+            modal: true
+        });
+        var body = JSON.stringify({
+            username: emailText,
+            password: passwordText,
+            qqId: qqId
+        });
+
+        api.ajax({
+            url: 'https://d.apicloud.com/mcm/api/user',
+            method: 'post',
+            timeout: 8,
+            dataType: 'json',
+            returnAll: false,
+            "headers": {
+                "X-APICloud-AppId": "A6918573369588",
+                "X-APICloud-AppKey": appKey1,
+                "Content-Type": "application/json"
+            },
+            "data": {
+                body: body
+            }
+        }, function(ret, err) {
+            api.hideProgress();
+            if (ret) {
+                if (ret && ret.id) {
+                    alert('亲爱的：' + ret.info.nickname + ',恭喜你注册成功');
+                } else {
+                    alert('用户名已存在');
+                }
+            }
+        });
+    };
+
+    function fnLogin() {
+        var emailText = userName,
+            passwordText = password;
+        api.showProgress({
+            title: '登录中',
+            modal: true
+        });
+
+        fnPost('user/login', {
+            body: JSON.stringify({
+                username: userName,
+                password: password
+            })
+        }, 'application/json', function(ret, err) {
+            if (ret && ret.id) {
+                alert('登录成功');
+                $api.setStorage('loginInfo', ret);
+                // api.closeWin();
+            } else {
+                alert('用户名或密码错误');
+            }
+        });
+    };
+
+    function fnPost(path, data, contentType, callback) {
+        api.showProgress({
+            title: '验证中',
+            modal: true
+        });
+
+        var headers = {
+            "X-APICloud-AppId": "A6918573369588",
+            "X-APICloud-AppKey": appKey1
+        };
+
+        if (contentType) {
+            headers["Content-Type"] = contentType
+        }
+        api.ajax({
+            url: 'https://d.apicloud.com/mcm/api/' + path,
+            method: 'post',
+            timeout: 5,
+            dataType: 'json',
+            returnAll: false,
+            headers: headers,
+            data: data
+        }, function(ret, err) {
+            api.hideProgress();
+            callback(ret, err);
+        });
+    };
+    // 登录成功设置用户的头像和昵称
+    function fnsetUser(userName, userIconUrl) {
+        var user = $api.byId('user');
+        user.innerHTML = '<div class="qqLogin" tapmode onclick="fnMore()"><div class="userIcon"><img src="' + userIconUrl + '"/></div><div class="userName">' + userName + '</div></div>';
+        alert('亲爱的：' + userName + ',登录成功');
+        api.sendEvent({
+            name: 'loginSuccess'
+        });
+        //api.setPrefs设置登录成功状态
+        api.setPrefs({
+            key: 'loginStatus',
+            value: 'loginSuccess'
+        });
+        //修改界面
+        //api.addEventListener监听登录成功事件（需执行才可生效）
+
+        api.setPrefs({
+            key: 'userName',
+            value: userName
+        });
+        api.setPrefs({
+            key: 'userIconUrl',
+            value: userIconUrl
+        });
+    }
+
+    function loginMobile(userName) {
+        var user = $api.byId('user');
+        user.innerHTML = '<div class="qqLogin" tapmode onclick="fnMore()"><div class="userIcon"><img src=" ../image/user.png"/></div><div class="userName">' + userName + '</div></div>';
+        api.sendEvent({
+            name: 'loginSuccess'
+        });
+        //api.setPrefs设置登录成功状态
+        api.setPrefs({
+            key: 'loginStatus',
+            value: 'loginSuccess'
+        });
+        //修改界面
+        //api.addEventListener监听登录成功事件（需执行才可生效）
+
+        api.setPrefs({
+            key: 'userName',
+            value: userName
+        });
+
+    }
+
+    function fnMore() {
+        api.openWin({
+            name: 'management',
+            url: './management.html',
+
+        });
+    }
+
+    function fnInform() {
+        api.openWin({
+            name: 'inform',
+            url: './inform.html',
+
+        });
+    }
+
+    function fnActivity() {
+        api.openWin({
+            name: 'activity',
+            url: './activity.html',
+
+        });
+    }
+
+    function fnDynamic() {
+        api.openWin({
+            name: 'dynamic',
+            url: './dynamic.html',
+
+        });
+    }
+
+    function fnShop() {
+        api.openWin({
+            name: 'shop',
+            url: './shop.html',
+
+        });
+    }
+
+    function fnDisclose() {
+        api.openWin({
+            name: 'disclose',
+            url: './disclose.html',
+
+        });
+    }
+</script>
+
+</html>

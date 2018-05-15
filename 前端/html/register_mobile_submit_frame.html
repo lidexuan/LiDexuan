@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            background-color: #f4f5f6;
+        }
+
+        .title {
+            height: 43px;
+            line-height: 43px;
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+            color: #222;
+            background-color: #fefefe;
+            border-bottom: 1px solid #d8d8d8;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .title .arrow {
+            width: 43px;
+            height: 43px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-image: url(../image/pic22.png);
+            background-repeat: no-repeat;
+            background-size: 11px 19px;
+            background-position: center center;
+        }
+
+        .register_box {
+            box-sizing: border-box;
+            padding: 30px 20px;
+        }
+
+        .phone {
+            width: 100%;
+            height: 43px;
+            border: 1px solid #e8e8e8;
+            background-color: #fff;
+            position: relative;
+        }
+
+        .phone input,
+        .password input {
+            width: 100%;
+            height: 44px;
+            line-height: 16px;
+            outline: none;
+            font-size: 14px;
+            color: #999;
+            box-sizing: border-box;
+            padding-left: 10px;
+        }
+
+        .password {
+            width: 100%;
+            height: 43px;
+            border: 1px solid #e8e8e8;
+            border-top: none;
+            background-color: #fff;
+        }
+
+        .again {
+            width: 115px;
+            height: 43px;
+            line-height: 43px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            background-image: url(../image/my/line.png);
+            background-repeat: no-repeat;
+            background-size: 1px 14px;
+            background-position: left center;
+        }
+
+        .submit {
+            width: 100%;
+            height: 44px;
+            line-height: 44px;
+            text-align: center;
+            font-size: 13px;
+            color: #fff;
+            border-radius: 4px;
+            background-color: #999;
+            margin: 20px 0 10px;
+        }
+
+        .txt {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            font-size: 11px;
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="register_box">
+
+        <div class="password">
+            <input id="password1" type="password1" placeholder="请设置密码(6-20数字或英文)">
+        </div>
+        <div class="password">
+            <input id="password2" type="password2" placeholder="请确认密码(输入与第一次相同的密码)">
+        </div>
+        <div class="password">
+            <input id="nickname" type="nickname" placeholder="请输入你的昵称">
+        </div>
+        <div class="submit" onclick="submit();">提交</div>
+
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+
+    };
+    var password;
+
+    function submit() {
+        password1 = $api.byId('password1').value;
+        password2 = $api.byId('password2').value;
+        nickname = $api.byId('nickname').value;
+        if (password1.length < 8 || password2.length < 8) {
+            alert("密码至少为八位")
+        } else {
+            if (password1 != password2) {
+                alret("两次密码不一致，请重新输入")
+            } else {
+                var ip = api.getPrefs({
+                    sync: true,
+                    key: 'IP'
+                });
+                api.ajax({
+                    url: ip+'phone',
+                    method: 'post',
+                    timeout: 5,
+                    dataType: 'json',
+                    returnAll: false,
+                    data: {
+                        body: JSON.stringify({
+                            'type': '1',
+                            'phone': api.pageParam.phone,
+                            'password': password1,
+                            'nickname': nickname,
+                        })
+                    }
+                }, function(ret, err) {
+                    if (ret.status == "fail") {
+                        alert("昵称已存在")
+                    } else if (ret.status == "sucess") {
+                        alert('亲爱的：' + nickname + ',恭喜你注册成功');
+                        api.closeWin();
+
+                    } else {
+                        alert('网络错误')
+                    }
+                });
+            }
+        }
+    }
+</script>
+
+</html>

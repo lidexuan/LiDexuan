@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .search_box {
+            width: 100%;
+            height: 50px;
+            background-color: #f4f5f6;
+            box-sizing: border-box;
+            padding-left: 15px;
+            padding-top: 8px;
+            padding-right: 15px;
+        }
+
+        .search {
+            width: 100%;
+            height: 33px;
+            line-height: 33px;
+            box-sizing: border-box;
+            padding-left: 31px;
+            font-size: 14px;
+            color: #999;
+            background-color: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 6px;
+            background-image: url(../image/search.png);
+            background-size: 15px 15px;
+            background-repeat: no-repeat;
+            background-position: 13px center;
+        }
+
+        .content {
+            box-sizing: border-box;
+            padding: 0 15px;
+        }
+
+        .content .text {
+            width: 100%;
+            line-height: 20px;
+            font-size: 16px;
+            color: #444;
+            padding-top: 15px;
+            padding-bottom: 21px;
+        }
+
+        .content .text2 {
+            width: 100%;
+            height: 24px;
+            line-height: 22px;
+            font-size: 12px;
+            color: #888;
+            box-sizing: border-box;
+            padding-left: 23px;
+            background-image: url(../image/pic3.png);
+            background-size: 16px 16px;
+            background-repeat: no-repeat;
+            background-position: left center;
+            position: relative;
+        }
+
+        .content .arrow {
+            width: 44px;
+            height: 8px;
+            display: inline-block;
+            box-sizing: border-box;
+            padding-right: 6px;
+            background-image: url(../image/pic5.png);
+            background-size: 8px 4px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            position: absolute;
+            right: 0;
+            bottom: 8px;
+        }
+
+        .content .section1 {
+            width: 100%;
+            height: 114px;
+            position: relative;
+            box-sizing: border-box;
+            padding-right: 123px;
+        }
+
+        .content .section1 .from {
+            float: left;
+        }
+
+        .content .img {
+            position: absolute;
+            right: 3px;
+            top: 10px;
+        }
+
+        .content .img img {
+            width: 120px;
+        }
+
+        .content .section2 .text2 {
+            width: 100%;
+            height: 24px;
+            line-height: 22px;
+            font-size: 12px;
+            color: #888;
+            box-sizing: border-box;
+            padding-left: 23px;
+            background-image: url(../image/pic4.png);
+            background-size: 16px 16px;
+            background-repeat: no-repeat;
+            background-position: left center;
+            position: relative;
+        }
+
+        .content2,
+        .content3 {
+            box-sizing: border-box;
+            padding: 0 15px;
+        }
+
+        .content2 .section,
+        .content3 .section {
+            width: 100%;
+            box-sizing: border-box;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .content2 .title,
+        .content3 .title {
+            font-size: 16px;
+            color: #444;
+            line-height: 20px;
+            padding-top: 1rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .content2 .pic_ul {
+            display: flex;
+            display: -webkit-flex;
+            display: -webkit-box;
+            flex-flow: row;
+            -webkit-flex-flow: row;
+            -webkit-box-orient: horizontal;
+        }
+
+        .content2 .pic {
+            flex: 1;
+            -webkit-flex: 1;
+            -webkit-box-flex: 1;
+            box-sizing: border-box;
+            width: 33%;
+            margin-right: 3px;
+        }
+
+        .content2 .pic img,
+        .content3 .pic img {
+            width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .content2 .text,
+        .content3 .text {
+            color: #888;
+            font-size: 12px;
+            position: relative;
+            padding-left: 22px;
+            padding-bottom: 8px;
+            line-height: 38px;
+        }
+
+        .content2 .icon,
+        .content3 .icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .content2 .icon img,
+        .content3 .icon img {
+            width: 50%;
+            margin-top: 11px;
+        }
+
+        .content2 .arrow,
+        .content3 .arrow {
+            position: absolute;
+            bottom: 8px;
+            right: 0px;
+            width: 38px;
+            height: 38px;
+            box-sizing: border-box;
+            background-image: url(../image/pic5.png);
+            background-size: 8px 4px;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        em {
+            padding-right: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search_box" id="search_box">
+        <div class="search" onclick="fnSearch();">搜索</div>
+    </div>
+    <div id="headlist"></div>
+</body>
+<script id="template" type="text/template">
+    {{~ it.datas:data }} {{? data.type==0}}
+    <div class="content" tapmode onclick="fnOpenContent('{{= data.id }}')">
+        <div class="section1">
+            <div class="from">
+                <div class="text">{{=data.name}}</div>
+                <div>
+                    <div class="text2">
+                        <em>{{=data.FromName}}</em>
+                        <em>{{=data.commentCount}}评论</em>
+                        <em>{{=data.time}}</em>
+                        <div class="arrow"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="img"><img src="{{=data.url}}" id="thumbnail0_{{=data.id}}"></div>
+            <div class="pic"></div>
+        </div>
+    </div>
+    {{?? data.type==1}}
+    <div class="content3" tapmode onclick="fnPlay('{{=data.video_url}}')">
+        <div class="section">
+            <div class="title">{{=data.name}}</div>
+            <div class="pic">
+                <img src="{{=data.url}}" id="thumbnail0_{{=data.id}}">
+            </div>
+            <div class="text">
+                <div class="icon"><img src="../image/pic3.png"></div>
+                <div>
+                    <em>{{=data.FromName}}</em>
+                    <em>{{=data.commentCount}}评论</em>
+                    <em>{{=data.time}}</em>
+                </div>
+                <div class="arrow"></div>
+            </div>
+        </div>
+    </div>
+    {{?? data.type==2}}
+    <div class="content2" tapmode onclick="fnOpenContent('{{= data.id }}')">
+        <div class="section">
+            <div class="title">{{=data.name}}</div>
+            <div class="pic_ul">
+                <div class="pic">
+                    <img src="{{=data.url_0}}" id="thumbnail0_{{=data.id}}_0">
+                </div>
+                <div class="pic">
+                    <img src="{{=data.url_1}}" id="thumbnail0_{{=data.id}}_1">
+                </div>
+                <div class="pic">
+                    <img src="{{=data.url_2}}" id="thumbnail0_{{=data.id}}_2">
+                </div>
+            </div>
+            <div class="text">
+                <div class="icon">
+                    <img src="../image/pic3.png"></div>
+                <div>
+                    <em>{{=data.FromName}}</em>
+                    <em>{{=data.commentCount}}评论</em>
+                    <em>{{=data.time}}</em>
+                </div>
+                <div class="arrow"></div>
+            </div>
+        </div>
+    </div>
+    {{?}} {{~}}
+</script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/SHA1.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/APICloud-rest.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        fnInitPull();
+        fninit();
+        headList(progress, isPull);
+        fnInitPushRefresh();
+
+    };
+    var frameName, search_box;
+    var headlist, dot;
+    var dataLoading = false,
+        isEmpty = false,
+        skip = 0,
+        LIMIT = 5,
+        progress = true,
+        isPull = true;
+    var typeNum;
+
+    function fnChangeMessage() {
+        var frameName = api.frameName;
+
+        var num = frameName.substring(11);
+        search_box = $api.byId('search_box');
+        if (num == 1) {
+            typeNum = 0;
+            search_box.style.display = "none";
+        } else if (num == 2) {
+            typeNum = 2;
+            search_box.style.display = "none";
+        } else if (num == 3) {
+            typeNum = 1;
+            search_box.style.display = "none";
+        } else {
+            typeNum == '';
+        }
+    }
+
+    function fnSearch() {
+        api.openWin({
+            name: 'search_home',
+            url: 'search_home.html',
+        });
+    };
+
+    function fnOpenPhotonews(id) {
+        api.openWin({
+            name: 'photonews',
+            url: './photonews.html',
+            pageParam: {
+                id: id
+            }
+        });
+    };
+
+    function fnOpenContent(id) {
+        api.openWin({
+            name: 'head_content',
+            url: './head_content.html',
+            pageParam: {
+                id: id
+            }
+        });
+    };
+    // 刷新
+    function fnInitPull() {
+        api.setRefreshHeaderInfo({
+            visible: true,
+            loadingImg: 'widget://image/refresh.png',
+            bgColor: '#f0f0f0',
+            textColor: '#888',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...',
+            showTime: true
+        }, function(ret, err) {
+            api.refreshHeaderLoadDone();
+            headList(progress, true);
+        });
+    };
+    // doT
+    function fninit() {
+        headlist = $api.byId('headlist');
+        var template = $api.byId('template');
+        dot = doT.template(template.innerHTML);
+
+    }
+    // 获取信息
+    function headList(progress, isPull) {
+        if (dataLoading) {
+            return;
+        }
+        dataLoading = true;
+
+        if (isPull) {
+            skip = 0;
+            isEmpty = false;
+        }
+
+        if (isEmpty) {
+            api.toast({
+                msg: '没有更多了',
+                duration: 2000,
+                location: 'bottom'
+            });
+            dataLoading = false;
+            return;
+        }
+        if (progress) {
+            api.showProgress({
+                title: '加载中',
+                modal: false
+            });
+        }
+
+        fnChangeMessage();
+        var now = Date.now();
+        var appKey1 = SHA1("A6918573369588" + "UZ" + "20C93719-0DE5-8C9B-2F05-36D9BB835C02" + "UZ" + now) + "." + now;
+        var appKey = '20C93719-0DE5-8C9B-2F05-36D9BB835C02';
+        var headers = {
+            "X-APICloud-AppId": "A6918573369588",
+            "X-APICloud-AppKey": appKey1,
+            "Content-Type": 'application/json'
+        };
+        var ip = api.getPrefs({
+            sync: true,
+            key: 'IP'
+          });
+        api.ajax({
+            url: ip+'news',
+            method: 'get',
+            timeout: 5,
+            returnAll: false,
+            headers: headers,
+            dataType: 'json'
+        }, function(ret, err) {
+            api.hideProgress();
+            api.refreshHeaderLoadDone();
+            dataLoading = false;
+            fnCacheImage(ret, 0);
+            if (!ret) {
+                api.toast({
+                    msg: '网络不给力',
+                    duration: 2000,
+                    location: 'bottom'
+                });
+                return;
+            }
+
+            skip += LIMIT;
+            if (ret.length < LIMIT) {
+                isEmpty = true;
+            }
+
+            if (ret.length == 0) {
+                return;
+            }
+            if (isPull) {
+                headlist.innerHTML = dot(ret);
+            } else {
+                headlist.innerHTML += dot(ret);
+            }
+        })
+    }
+    // 下拉加载更多
+    function fnInitPushRefresh() {
+
+        api.addEventListener({
+            name: 'scrolltobottom',
+            extra: {
+                threshold: 200
+            }
+        }, function(ret, err) {
+
+            headList(progress, false);
+        });
+    };
+    //设置图片
+    var imgIndex = 0;
+
+    function fn(data, index) {
+
+        if (imgIndex == 3) {
+            fnCacheImage(data, index + 1);
+            return;
+        }
+
+        if (imgIndex == 0) {
+            var url = data[index].thumbnail0.url;
+            api.imageCache({
+                url: url
+            }, function(ret, err) {
+                $api.byId('thumbnail0_' + data[index].id + '_0').src = ret.url;
+
+            });
+        } else if (imgIndex == 1) {
+            var url = data[index].thumbnail1.url;
+            api.imageCache({
+                url: url
+            }, function(ret, err) {
+                $api.byId('thumbnail0_' + data[index].id + '_1').src = ret.url;
+
+            });
+        } else {
+            // var url = data[index].thumbnail1.url;
+            var url = data[index].thumbnail2.url;
+            api.imageCache({
+                url: url
+            }, function(ret, err) {
+                $api.byId('thumbnail0_' + data[index].id + '_2').src = ret.url;
+
+            });
+
+        }
+        imgIndex++;
+        fn(data, index);
+    }
+
+    function fnCacheImage(data, index) {
+        if (data.length <= index) {
+            return;
+        }
+        if (data.datas[index].type == 2) {
+            imgIndex = 0;
+            fn(data, index);
+
+        } else {
+            api.imageCache({
+                url: data.datas[index].url
+            }, function(ret, err) {
+                $api.byId('thumbnail0_' + data.datas[index].id).src = ret.url;
+                fnCacheImage(data, index + 1);
+            });
+        }
+
+    };
+
+    //视频
+
+    function fnPlay(url) {
+        var videoPlayer = api.require('videoPlayer');
+        videoPlayer.play({
+            texts: {
+                head: {
+                    title: '视频'
+                }
+            },
+            styles: {
+                head: {
+                    bg: 'rgba(0.5,0.5,0.5,0.7)',
+                    height: 44,
+                    titleSize: 16,
+                    titleColor: '#fff',
+                    backSize: 20,
+                    backImg: 'fs://img/back.png',
+                    setSize: 20,
+                    setImg: 'fs://img/set.png'
+                },
+
+            },
+            path: url,
+
+            autoPlay: true
+        });
+    }
+</script>
+
+</html>

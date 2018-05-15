@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+	<link rel="stylesheet" type="text/css" href="../css/au.css" />
+	<style>
+		.sm textarea {
+			color: #979797;
+			height: 6.4rem
+		}
+
+		.aui-list {
+			border-top: none;
+		}
+
+		@media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+			.aui-list {
+				border: none;
+				background-size: 100% 0px;
+			}
+		}
+
+		.aui-list .aui-list-item:active {
+			background-color: #FFFFFF;
+		}
+
+		.imglist {
+			width: 100%;
+			clear: both;
+			margin: 1rem auto;
+		}
+
+		.imglist img {
+			width: 4rem;
+			height: 4rem;
+		}
+
+		.add {
+			width: 4rem;
+			height: 4rem;
+			background: url(../res/add.png) no-repeat;
+			background-size: 100% 100%;
+			float: left;
+			margin-right: 1rem;
+		}
+
+		.addimg {
+			float: left;
+			height: 4rem;
+			width: 4rem;
+			margin-right: 1rem;
+			margin-bottom: 1rem;
+		}
+
+		.addimg img {
+			width: 4rem;
+			height: 4rem;
+		}
+
+		.addimg .x img {
+			width: 0.8rem;
+			height: 0.8rem;
+			position: relative;
+			top: -4.4rem;
+			left: -0.5rem;
+		}
+		/*遮罩层*/
+
+		.mask {
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, .5);
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 999;
+			display: none;
+		}
+
+		.alert {
+			width: 12rem;
+			height: 7.42rem;
+			border-radius: 0.2rem;
+			background: #fff;
+			font-size: 0.75rem;
+			text-align: center;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-left: -6rem;
+			margin-top: -4.2rem;
+		}
+
+		.alert p:nth-child(1) {
+			line-height: 5rem;
+			border-bottom: 1px solid #EBEBEB;
+			font-size: 0.9rem;
+		}
+
+		.alert p:nth-child(2) span {
+			display: inline-block;
+			width: 49%;
+			height: 2.4rem;
+			line-height: 2.4rem;
+			float: left;
+			font-size: 0.8rem;
+		}
+
+		.cancel {
+			border-right: 1px solid #EBEBEB;
+			color: #00BB3D;
+		}
+
+		.sure {
+			color: #F60;
+		}
+	</style>
+</head>
+
+<body>
+	<header class="aui-bar aui-bar-nav">
+		<a class="aui-btn aui-pull-left " tapmode onclick="api.closeWin();"> <span class="aui-iconfont aui-icon-left"></span> &nbsp;返回</a>
+		<div class="aui-title">
+			发布广场
+		</div>
+		<a class="aui-pull-right" tapmode onclick="publish()">发 表</a>
+	</header>
+	<div class="aui-card-list">
+		<div class="aui-content aui-margin-b-15">
+			<ul class="aui-list aui-form-list">
+				<li class="aui-list-item">
+					<div class="aui-list-item-inner sm">
+						<textarea id="sm" placeholder="说点什么吧"></textarea>
+					</div>
+				</li>
+				<li class="aui-list-item">
+					<div class="imglist">
+						<div id='add' class="add" onclick="upimg()"></div>
+					</div>
+					<!--遮罩层-->
+					<div class="mask">
+						<!--弹出框-->
+						<div class="alert">
+							<p>
+								确定要删除这张图片吗？
+							</p>
+							<p>
+								<span class="cancel">取消</span>
+								<span class="sure">确定</span>
+							</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<ul class="aui-list aui-list-in">
+				<li class="aui-list-item">
+					<div class="aui-list-item-label-icon">
+						<i class="aui-iconfont aui-icon-location aui-text-success"></i>
+					</div>
+					<div class="aui-list-item-inner" id="address">
+						<div class="aui-list-item-title" id="Address" tapmode onclick="Positioning()">地址</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+	apiready = function() {
+		$api.fixStatusBar($api.dom('.aui-bar'));
+	};
+
+	function publish() {
+		var a = document.getElementsByTagName("img").length;
+		var b = a / 2
+		var text = document.getElementById('sm').value;
+		var address = $api.byId('Address').innerHTML;
+		var arrayObj = {}　
+
+		if (a != 0) {
+			for (i = 0; i < a; i = i + 2) {
+				arrayObj['file' + (i / 2).toString()] = document.getElementsByTagName("img")[i].src
+			}
+		}
+
+		if (text.replace(/(^\s*)|(\s*$)/g, "") == "" && a == 0) {
+			alert("发送内容不能为空")
+		} else {
+			var ip = api.getPrefs({
+				sync: true,
+				key: 'IP'
+			});
+			var id = api.getPrefs({
+				sync: true,
+				key: 'userID'
+			});
+			api.ajax({
+				url: ip + 'dynamic_publishing',
+				method: 'post',
+				data: {
+					values: {
+						length: b,
+						text: text,
+						address: address,
+						id: id
+					},
+					files: arrayObj
+				}
+			}, function(ret, err) {
+				if (ret) {
+					api.alert({
+						msg: "发表成功"
+					});
+					api.execScript({
+						name: 'main',
+						frameName: 'recommentlist_frame',
+						script: '  api.refreshHeaderLoadDone();headList(progress, true);'
+					});
+					api.closeWin();
+				} else {
+					api.alert({
+						msg: JSON.stringify(err)
+					});
+				}
+			});
+		}
+
+	}
+
+	function Positioning() {
+		var bMap = api.require('bMap');
+		bMap.getLocation({
+			accuracy: '100m',
+			autoStop: true,
+			filter: 1
+		}, function(ret, err) {
+			if (ret.status) {
+				var map = api.require('bMap');
+				map.getNameFromCoords({
+					lon: ret.lon,
+					lat: ret.lat
+				}, function(ret, err) {
+					if (ret.status) {
+						var Address = JSON.stringify(ret.poiList[0].address + ret.poiList[0].name);
+						api.confirm({
+							title: '确定使用该地址吗',
+							msg: JSON.stringify(ret.province + ret.city + ret.district + ret.sematicDescription),
+							buttons: ['确定', '取消'],
+
+						}, function(ret, err) {
+							var index = ret.buttonIndex;
+							if (index == 1) {
+								var address = $api.byId('address');
+								address.innerHTML = '<div class="aui-list-item-title" id="Address" tapmode onclick="Positioning()">' + Address + '</div>';
+							} else {
+								var address = $api.byId('address');
+								address.innerHTML = '	<div class="aui-list-item-title" id="Address" tapmode onclick="Positioning()">' + '地址' + '</div>';
+
+							}
+						});
+					}
+				});
+			} else {
+				alert(err.code);
+			}
+		});
+	}
+
+	function upimg() {
+		api.actionSheet({
+			cancelTitle: '取消',
+			buttons: ['拍照', '相册']
+		}, function(ret, err) {
+			if (ret) {
+				getPicture(ret.buttonIndex);
+			}
+		});
+	}
+
+	function getPicture(sourceType) {
+		if (sourceType == 1) {
+			api.getPicture({
+				sourceType: 'camera',
+				encodingType: 'png',
+				mediaValue: 'pic',
+				allowEdit: false,
+				saveToPhotoAlbum: false
+			}, function(ret, err) {
+				var imgs = $api.dom(".imglist");
+				var imgList = document.getElementsByClassName("addimg");
+				if (!ret.data.length) {} else {
+					if (imgList.length >= 6) {
+						api.toast({
+							msg: '不能再添加啦',
+							duration: 3000,
+							location: 'bottom'
+						});
+					} else {
+						var dcc = document.createElement("div");
+						dcc.setAttribute("class", "addimg");
+						dcc.setAttribute("onclick", "yichu(this)");
+						dcc.innerHTML = '<img src="' + ret.data + '"/><div class="x" ><img src="../res/x.png"/></div>';
+						prependChild(dcc, imgs)
+					}
+				}
+			});
+		} else if (sourceType == 2) {
+			var obj = api.require('UIMediaScanner');
+			obj.open({
+				type: 'picture',
+				column: 4,
+				max: 6,
+				classify: true,
+				sort: {
+					key: 'time',
+					order: 'desc'
+				},
+				texts: {
+					stateText: '已选择*项',
+					cancelText: '取消',
+					finishText: '完成'
+				},
+				styles: {
+					bg: '#fff',
+					mark: {
+						icon: '',
+						position: 'top_right',
+						size: 28
+					},
+					nav: {
+						bg: '#eee',
+						stateColor: '#000',
+						stateSize: 16,
+						cancleBg: 'rgba(0,0,0,0)',
+						cancelColor: '#000',
+						cancelSize: 16,
+						finishBg: 'rgba(0,0,0,0)',
+						finishColor: '#000',
+						finishSize: 16
+					}
+				}
+			}, function(ret) {
+				var imgs = $api.dom(".imglist");
+				var imgList = document.getElementsByClassName("addimg");
+				if (ret.eventType == 'cancel') {} else if (ret.list.length > 0) {
+					if (imgList.length >= 6) {
+						api.toast({
+							msg: '不能再添加啦',
+							duration: 3000,
+							location: 'bottom'
+						});
+					} else {
+						for (var i = 0; i < ret.list.length; i++) {
+							var dcc = document.createElement("div");
+							dcc.setAttribute("class", "addimg");
+							dcc.setAttribute("onclick", "yichu(this)");
+							dcc.innerHTML = '<img src="' + ret.list[i].path + '"/><div class="x" ><img src="../res/x.png"/></div>';
+							prependChild(dcc, imgs)
+
+						}
+					}
+				}
+			});
+		}
+	}
+
+	function yichu(el) {
+		$api.css($api.dom(".mask"), 'display:block');
+		$api.dom(".cancel").onclick = function() {
+			$api.css($api.dom(".mask"), 'display:none');
+		};
+		$api.dom(".sure").onclick = function() {
+			$api.css($api.dom(".mask"), 'display:none');
+			$api.remove(el);
+		};
+	}
+
+	function prependChild(html, el) {
+		if (el.hasChildNodes()) {
+			el.insertBefore(html, el.firstChild);
+		} else {
+			el.appendChild(html);
+		}
+	}
+</script>
+
+</html>

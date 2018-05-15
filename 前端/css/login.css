@@ -1,0 +1,383 @@
+@font-face {
+ font-family: 'm-icons';
+ src: url('font/m-icons.eot?#iefixlwqvve') format('embedded-opentype'), url('font/m-icons.woff?lwqvve') format('woff'), url('font/m-icons.ttf?lwqvve') format('truetype');
+ font-weight: normal;
+ font-style: normal;
+}
+[class^="icon-"], [class*=" icon-"] {
+ font-family: 'm-icons';
+ speak: none;
+ font-style: normal;
+ font-weight: normal;
+ font-variant: normal;
+ text-transform: none;
+ line-height: 1;
+ -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale;
+}
+.icon-alipay:before {
+	content: "\e604";
+}
+.icon-back:before {
+	content: "\e606";
+}
+.icon-my:before {
+	content: "\e622";
+}
+.icon-password:before {
+	content: "\e623";
+}
+.icon-qq:before {
+	content: "\e626";
+}
+.icon-weibo:before {
+	content: "\e63f";
+}
+.icon-weixin:before {
+	content: "\e640";
+}
+.icon-phone:before {
+	content: "\e625";
+}
+.icon-code:before {
+	content: "\e62a";
+}
+
+.text-primary {
+	color: #00bcd4 !important;
+}
+.text-success {
+	color: #009688 !important;
+}
+.text-info {
+	color: #03a9f4 !important;
+}
+.text-warning {
+	color: #ffc107 !important;
+}
+.text-danger {
+	color: #e51c23 !important;
+}
+.text-pink {
+	color: #e91e63 !important;
+}
+.text-purple {
+	color: #673ab7 !important;
+}
+.text-indigo {
+	color: #3f51b5 !important;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-text-size-adjust: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	font-family: Arial, 'Microsoft YaHei';
+}
+img {
+	vertical-align: top;
+	border: none;
+}
+input, textarea {
+	-webkit-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+	-webkit-appearance: none;
+}
+input:focus, select:focus, textarea:focus, button:focus {
+	outline: none;
+}
+input[type="text"], input[type="password"], input[type="search"], input[type="tel"], input[type="number"], input[type="email"], input[type="url"], textarea {
+	-webkit-appearance: none;
+	border: 1px solid;
+	border-radius: 0;
+}
+input[type="number"]::-webkit-inner-spin-button {
+ -webkit-appearance: none;
+}
+a {
+	text-decoration: none;
+	-webkit-touch-callout: none;
+}
+em, i {
+	font-style: normal;
+}
+li {
+	list-style: none;
+}
+html {
+	font-size: 10px;
+	overflow-y:visible;
+}
+body {
+	font-size: 1.2em;
+	background-color: #FCFCFC;
+}
+.login .login_box {
+	margin-top: 7rem;
+	border-top: 1px solid #E8E8E8;
+	border-bottom: 1px solid #E8E8E8;
+	background-color: #fff;
+}
+.login .login_box .form_item {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	width: 280px;
+	height: 44px;
+	margin: 0 auto;
+}
+.login .login_box .form_item:last-child .input_box {
+	border: none;
+}
+.login .login_box .form_item label {
+	display: block;
+	width: 42px;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	font-size: 1.9rem;
+	color: #666;
+}
+.login .login_box .form_item .input_box {
+	position: relative;
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	width: 100%;
+	width: auto;
+	height: 43px;
+	border-bottom: 1px solid #e5e5e5;
+}
+.login .login_box .form_item .input_box.write .icon_delete {
+	display: block;
+}
+.login .login_box .form_item .input_box input {
+	width: 100%;
+	height: 43px;
+	line-height: 20px;
+	padding: 12px 30px 11px 10px;
+	border: none;
+	font-size: 1.6rem;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.login .login_box .form_item .input_box .icon_delete {
+	display: none;
+	position: absolute;
+	right: 5px;
+	top: 7px;
+	z-index: 1;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	font-size: 1.4rem;
+	color: #ccc;
+}
+.login .login_box .form_item .input_box .icon_delete:active {
+	color: #426bf2;
+}
+
+.login .login_box .form_item .input_box .code { width: 130px; padding: 24px 0 11px 10px; vertical-align: middle; }
+
+.sent { vertical-align: middle; font-size: 1.5rem; color: #666; width: 90px; float:right }
+.sent a {
+	display: block;
+	margin-top: 18px;
+	border: 1px solid #E3E3E3;
+	line-height: 30px;
+	text-align: center;
+	background-color: #FCFCFC;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	color: #9A9A9A;
+}
+.login .remember_login {
+	position: relative;
+	max-width: 290px;
+	height: 30px;
+	margin: 20px auto 0;
+}
+
+.sents { vertical-align: middle; font-size: 1.5rem; color: #666; width: 90px; float:right }
+.sents a {
+	display: block;
+	margin-top: 18px;
+	border: 1px solid #00B53A;
+	line-height: 30px;
+	text-align: center;
+	background: #00BF3F;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	color:#F5F5F5
+}
+.login_box .form_item .input_box .sents .btn0:visited {
+	color: #FFF;
+}
+.login_box .form_item .input_box .sents .btn0:active {
+	color: #FFF;
+	background-color: #009330;
+	border: 1px solid #008C2E;
+}
+
+
+.login .remember_login input[type="checkbox"] {
+	position: relative;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #e6e6e6;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	background-color: #fff;
+	vertical-align: middle;
+}
+.login .remember_login input[type="checkbox"]:checked {
+	border-color: #8ab746;
+	background-color: #8ab746;
+}
+.login .remember_login input[type="checkbox"]:checked:after {
+	content: '';
+	position: absolute;
+	left: 3px;
+	top: 4px;
+	width: 11px;
+	height: 5px;
+	border-left: 2px solid #fff;
+	border-bottom: 2px solid #fff;
+	-webkit-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+.login .remember_login label {
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	margin-left: 5px;
+	font-size: 1.6rem;
+	color: #666;
+	vertical-align: middle;
+}
+.login .remember_login .forgot_password {
+	position: absolute;
+	right: 0;
+	top: 0;
+	line-height: 30px;
+	font-size: 1.5rem;
+	color: #07a5ff;
+}
+.login .remember_login .forgot_password:visited {
+	color: #07a5ff;
+}
+.login .login_btn {
+	max-width: 290px;
+	margin: 30px auto 0;
+}
+.login .login_btn .btn {
+	display: block;
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	text-align: center;
+	font-size: 1.7rem;
+	color: #fff;
+	background-color: #3FBC7D;
+}
+.login .login_btn .btn:visited {
+	color: #fff;
+}
+.login .login_btn .btn:active {
+	background-color: #2BA880;
+}
+.login .other__login {
+	margin: 2rem 0;
+}
+.login .other__login h2 {
+	height: 20px;
+	border-bottom: 1px solid #d9d9d9;
+	text-align: center;
+}
+.login .other__login h2 span {
+	display: inline-block;
+	height: 22px;
+	line-height: 22px;
+	padding: 0 1em;
+	background-color: #FCFCFC;
+	color: #9E9E9E;
+	font-size: 1.6rem;
+	-webkit-transform: translate3d(0, 50%, 0);
+	-ms-transform: translate3d(0, 50%, 0);
+	transform: translate3d(0, 50%, 0);
+	font-weight: normal
+}
+.login .other__login ul {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	max-width: 300px;
+	margin: 4rem auto 0;
+}
+.login .other__login ul li {
+	width: 25%;
+	text-align: center;
+}
+.login .other__login ul li a {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	font-size: 2.8rem;
+	background-color: #fff;
+}
+.login .other__login ul li .icon-alipay {
+	color: #f27444;
+}
+.login .other__login ul li .icon-alipay:visited {
+	color: #f27444;
+}
+.login .other__login ul li .icon-alipay:active {
+	background-color: #f27444;
+	color: #fff;
+}
+.login .other__login ul li .icon-weibo {
+	color: #ff6766;
+}
+.login .other__login ul li .icon-weibo:visited {
+	color: #ff6766;
+}
+.login .other__login ul li .icon-weibo:active {
+	background-color: #ff6766;
+	color: #fff;
+}
+.login .other__login ul li .icon-qq {
+	color: #65b1f1;
+}
+.login .other__login ul li .icon-qq:visited {
+	color: #65b1f1;
+}
+.login .other__login ul li .icon-qq:active {
+	background-color: #65b1f1;
+	color: #fff;
+}
+.login .other__login ul li .icon-weixin {
+	color: #8cd76b;
+}
+.login .other__login ul li .icon-weixin:visited {
+	color: #8cd76b;
+}
+.login .other__login ul li .icon-weixin:active {
+	background-color: #8cd76b;
+	color: #fff;
+}

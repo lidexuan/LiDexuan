@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            background-color: #f4f5f6;
+        }
+
+        .title {
+            height: 43px;
+            line-height: 43px;
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+            color: #222;
+            background-color: #fefefe;
+            border-bottom: 1px solid #d8d8d8;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .title .arrow {
+            width: 43px;
+            height: 43px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-image: url(../image/pic22.png);
+            background-repeat: no-repeat;
+            background-size: 11px 19px;
+            background-position: center center;
+        }
+
+        .register_box {
+            box-sizing: border-box;
+            padding: 30px 20px;
+        }
+
+        .phone {
+            width: 100%;
+            height: 43px;
+            border: 1px solid #e8e8e8;
+            background-color: #fff;
+            position: relative;
+        }
+
+        .phone input,
+        .password input {
+            width: 100%;
+            height: 44px;
+            line-height: 16px;
+            outline: none;
+            font-size: 14px;
+            color: #999;
+            box-sizing: border-box;
+            padding-left: 10px;
+        }
+
+        .password {
+            width: 100%;
+            height: 43px;
+            border: 1px solid #e8e8e8;
+            border-top: none;
+            background-color: #fff;
+        }
+
+        .again {
+            width: 115px;
+            height: 43px;
+            line-height: 43px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            background-image: url(../image/my/line.png);
+            background-repeat: no-repeat;
+            background-size: 1px 14px;
+            background-position: left center;
+        }
+
+        .submit {
+            width: 100%;
+            height: 44px;
+            line-height: 44px;
+            text-align: center;
+            font-size: 13px;
+            color: #fff;
+            border-radius: 4px;
+            background-color: #999;
+            margin: 20px 0 10px;
+        }
+
+        .txt {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            font-size: 11px;
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title" id="header">
+        <div class="arrow event-back"></div>
+        手机号注册
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        fnReady();
+        fnInit();
+    };
+    var headerHeight;
+
+    function fnInit(username) {
+        headerHeight = getHeaderHeight();
+        api.openFrame({
+            name: 'register_mobile_frame',
+            url: './register_mobile_submit_frame.html',
+            bounces: false,
+            pageParam:{
+              'phone':api.pageParam.phone,
+            },
+            rect: {
+                x: 0,
+                y: headerHeight,
+                w: 'auto',
+                h: api.winHeight - headerHeight
+            }
+        });
+    }
+</script>
+
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <title>title</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <style>
+            html,
+            body {
+                height: 100%;
+                background-color: #f4f5f6;
+            }
+
+            .sky1 {
+                width: 100%;
+                height: 8px;
+                background-color: #f4f5f6;
+                border-bottom: 1px solid #e8e8e8;
+            }
+
+            .sky2 {
+                width: 100%;
+                height: 15px;
+                background-color: #f4f5f6;
+                border-top: 1px solid #e8e8e8;
+                border-bottom: 1px solid #e8e8e8;
+            }
+
+            .cont {
+                background-color: #fff;
+                box-sizing: border-box;
+                padding-left: 15px;
+            }
+
+            .t1,
+            .t2,
+            .t3,
+            .t4 {
+                height: 49px;
+                line-height: 49px;
+                width: 100%;
+                font-size: 15px;
+                color: #222;
+                position: relative;
+            }
+
+            .t2 {
+                border-top: 1px solid #f3f3f3;
+                border-bottom: 1px solid #f3f3f3;
+            }
+
+            .t4 {
+                border-bottom: 1px solid #f3f3f3;
+            }
+
+            .r {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                box-sizing: border-box;
+                padding-right: 16px;
+                color: #999;
+                font-size: 13px;
+                line-height: 49px;
+                text-align: center;
+            }
+            .btn {
+                height: 49px;
+                line-height: 49px;
+                width: 100%;
+                font-size: 15px;
+                color: #222;
+                position: relative;
+            }
+
+            .btn .close {
+                width: 85px;
+                height: 49px;
+                background-image: url(../image/my/close.png);
+                background-repeat: no-repeat;
+                background-size: 50px 33px;
+                background-position: center center;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+            }
+
+            .active .close {
+                width: 85px;
+                height: 49px;
+                background-image: url(../image/my/open.png);
+                background-repeat: no-repeat;
+                background-size: 50px 33px;
+                background-position: center center;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+            }
+
+            .arrow {
+                width: 40px;
+                height: 49px;
+                background-image: url(../image/my/arrow.png);
+                background-repeat: no-repeat;
+                background-size: 6px 12px;
+                background-position: center center;
+            }
+
+            .text1 {
+                text-align: center;
+                font-size: 12px;
+                color: #2a90d7;
+                line-height: 56px;
+            }
+
+            .text2 {
+                text-align: center;
+                color: #999;
+                font-size: 12px;
+                line-height: 55px;
+            }
+
+            .text3 {
+                text-align: center;
+                font-size: 9px;
+                color: #999;
+                line-height: 14px;
+            }
+        </style>
+    </head>
+
+    <body>
+    <div id="content">
+        <div class="sky1"></div>
+        <div class="cont">
+            <div class="btn" tapmode>自动登陆
+                <div class="close"></div>
+            </div>
+            <div class="t2">字体大小
+                <div class="r">中</div>
+            </div>
+            <div class="t3">列表页评论
+                <div class="r">不限</div>
+            </div>
+        </div>
+        <div class="sky2"></div>
+        <div class="cont">
+            <div class="t4">非WIFI网络流量
+                <div class="r">较省流量(智能下图)</div>
+            </div>
+            <div class="t3">清除缓存
+                <div class="r">0.0MB</div>
+            </div>
+        </div>
+        <div class="sky2"></div>
+        <div class="cont">
+            <div class="btn" >推送通知
+                <div class="close" tapmode></div>
+            </div>
+            <div style="border-top: 1px solid #f3f3f3;border-bottom: 1px solid #f3f3f3; " class="btn active" tapmode>互动插件
+                <div class="close"></div>
+            </div>
+            <div class="btn" tapmode>收藏时转发
+                <div class="close"></div>
+            </div>
+        </div>
+        <div class="sky2"></div>
+        <div class="cont">
+            <div class="t1">检查新版本
+                <div class="r"></div>
+            </div>
+            <div class="t2">精彩应用推荐
+                <div class="r arrow"></div>
+            </div>
+            <div class="t3">使用帮助
+                <div class="r arrow"></div>
+            </div>
+        </div>
+        <div class="text1" tapmode onclick="fnOpen()">云顶在线用户协议</div>
+        <div class="text2"> &copy; 云顶在线 yunding.com</div>
+    </div>
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/common.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+            fnReady();
+        };
+        function fnOpen(){
+          api.openWin({
+              name: 'user',
+              url: './user_agreement.html',
+              pageParam: {
+                  name: 'test'
+              }
+          });
+
+        }
+
+        window.onload = function(){
+            var content = document.getElementById('content');
+            var btns=content.getElementsByClassName('btn');
+
+             for(var i=0;i<btns.length;i++){
+                btns[i].onclick=function(){
+                    if(this.className=="btn"){
+                        this.className="btn active";
+                    }else{
+                        this.className="btn";
+                    }
+                }
+            }
+        }
+    </script>
+
+</html>

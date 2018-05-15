@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            background-color: #f4f5f6;
+        }
+
+        .sky1 {
+            width: 100%;
+            height: 8px;
+            background-color: #f4f5f6;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .sky2 {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            font-size: 13px;
+            color: #9d9d9d;
+            background-color: #f4f5f6;
+            border-top: 1px solid #e8e8e8;
+            border-bottom: 1px solid #e8e8e8;
+            box-sizing: border-box;
+            padding-left: 15px;
+        }
+
+        .sky3 {
+            width: 100%;
+            height: 35px;
+            background-color: #f4f5f6;
+            border-top: 1px solid #e8e8e8;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .cont {
+            background-color: #fff;
+            box-sizing: border-box;
+            padding-left: 15px;
+        }
+
+        .t1 {
+            height: 70px;
+            line-height: 70px;
+            width: 100%;
+            font-size: 15px;
+            color: #222;
+            position: relative;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .t3 {
+            height: 50px;
+            line-height: 50px;
+            width: 100%;
+            font-size: 15px;
+            color: #222;
+            position: relative;
+        }
+
+        .t2 {
+            height: 49px;
+            line-height: 49px;
+            width: 100%;
+            font-size: 15px;
+            color: #222;
+            position: relative;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .btn {
+            height: 49px;
+            line-height: 49px;
+            width: 100%;
+            font-size: 15px;
+            color: #222;
+            position: relative;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .r {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            box-sizing: border-box;
+            padding-right: 16px;
+            color: #999;
+            font-size: 13px;
+            line-height: 49px;
+            text-align: center;
+        }
+
+        .close {
+            width: 85px;
+            height: 49px;
+            background-image: url(../image/my/close.png);
+            background-repeat: no-repeat;
+            background-size: 50px 33px;
+            background-position: center center;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            box-sizing: border-box;
+            padding-right: 16px;
+            color: #999;
+            font-size: 13px;
+            line-height: 49px;
+            text-align: center;
+        }
+
+        .active .close {
+            width: 85px;
+            height: 49px;
+            background-image: url(../image/my/open.png);
+            background-repeat: no-repeat;
+            background-size: 50px 33px;
+            background-position: center center;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            box-sizing: border-box;
+            padding-right: 16px;
+            color: #999;
+            font-size: 13px;
+            line-height: 49px;
+            text-align: center;
+        }
+
+        .arrow {
+            width: 40px;
+            height: 50px;
+            background-image: url(../image/my/arrow.png);
+            background-repeat: no-repeat;
+            background-size: 6px 12px;
+            background-position: center center;
+        }
+
+        .arrow_t1 {
+            width: 40px;
+            height: 70px;
+            background-image: url(../image/my/arrow.png);
+            background-repeat: no-repeat;
+            background-size: 6px 12px;
+            background-position: center center;
+        }
+
+        .back {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 15px;
+            color: #f85959;
+            background-color: #fff;
+            font-weight: 600;
+        }
+
+        .text {
+            font-size: 13px;
+            color: #a0a0a0;
+            float: right;
+            padding-right: 33px;
+            box-sizing: border-box;
+        }
+
+        .text1 {
+            font-size: 13px;
+            color: #f85959;
+            float: right;
+            padding-right: 33px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sky1"></div>
+    <div class="cont">
+        <div class="t1">头像
+            <div class="r arrow_t1"></div>
+        </div>
+        <div class="t2">昵称
+            <div class="text">奋斗的小青年</div>
+            <div class="r arrow"></div>
+        </div>
+        <div class="t2">
+            签名
+            <div class="text">这个人很懒，什么都没留下</div>
+            <div class="r arrow"></div>
+        </div>
+        <div class="t3">
+            手机号
+            <div class="text1">绑定手机号</div>
+            <div class="r arrow"></div>
+        </div>
+    </div>
+    <div class="sky2">账号绑定</div>
+    <div class="cont" id="content">
+        <div class="btn" tapmode>微信
+            <div class="close"></div>
+        </div>
+        <div class="btn active" tapmode>腾讯QQ
+            <div class="close"></div>
+        </div>
+        <div class="btn" tapmode>新浪微博
+            <div class="close"></div>
+        </div>
+        <div class="btn" tapmode>腾讯微博
+            <div class="close"></div>
+        </div>
+        <div style="border-bottom: none;" class="btn" tapmode>人人网
+            <div class="close"></div>
+        </div>
+    </div>
+    <div class="sky3"></div>
+    <div class="back" tapmode onclick="fnMyfrome()">退出登录</div>
+    <div class="sky3"></div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        fnReady();
+    };
+
+    function fnMyfrome() {
+        api.sendEvent({
+            name: 'logoutSuccess'
+        });
+        //api.removePrefs移除登录状态
+        api.removePrefs({
+            key: 'loginStatus'
+        });
+        api.removePrefs({
+            key: 'userID'
+        });
+        //修改界面
+        //api.addEventListener监听登出成功事件（需执行才可生效）
+        api.addEventListener({
+            name: 'logoutSuccess'
+        }, function(ret, err) {
+            if (ret) {
+                api.closeWin({
+                    name: 'management'
+                });
+
+            }
+        });
+    };
+
+    window.onload = function() {
+        var content = document.getElementById('content');
+        var btns = content.getElementsByClassName('btn');
+
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].onclick = function() {
+                if (this.className == "btn") {
+                    this.className = "btn active";
+                } else {
+                    this.className = "btn";
+                }
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>Hello APP</title>
+</head>
+
+<body>
+</body>
+<script type="text/javascript" src="./script/api.js"></script>
+<script type="text/javascript" src="./script/local.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        fnOpenMain();
+        fnOpenAd();
+        api.removePrefs({
+            key: 'loginStatus'
+        });
+        api.removePrefs({
+            key: 'userID'
+        });
+        api.setPrefs({
+            key: 'IP',
+            value: 'http://192.168.31.159:8000/'
+        });
+    };
+
+    function fnOpenMain() {
+        api.openWin({
+            name: 'main',
+            url: './html/main.html',
+            bounces: false,
+            vScrollBarEnabled: false,
+            hScrollBarEnabled: false,
+            slidBackEnabled: false
+        });
+    };
+
+    function fnOpenAd() {
+        api.openWin({
+            name: 'ad',
+            url: './html/ad.html',
+            bgColor: './image/ad.png',
+            bounces: false,
+            vScrollBarEnabled: false,
+            hScrollBarEnabled: false,
+            slidBackEnabled: false,
+            animation: {
+                type: 'none'
+            }
+        });
+    };
+</script>
+
+</html>

@@ -1,0 +1,61 @@
+<widget id="A6077777179396" version="0.0.1">
+
+    <name>云顶在线</name>
+
+    <description>
+
+        Example For APICloud.
+
+    </description>
+
+    <author email="1029103892@qq.com" href="http://www.apicloud.com">
+
+        Developer
+
+    </author>
+
+    <content src="index.html"/>
+
+    <access origin="*"/>
+    <preference name="pageBounce" value="false"/>
+    <preference name="appBackground" value="rgba(0,0,0,0.0)"/>
+    <preference name="windowBackground" value="rgba(0,0,0,0.0)"/>
+    <preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
+    <preference name="hScrollBarEnabled" value="false"/>
+    <preference name="vScrollBarEnabled" value="false"/>
+    <preference name="autoLaunch" value="false"/>
+    <preference name="fullScreen" value="false"/>
+    <preference name="autoUpdate" value="true"/>
+    <preference name="smartUpdate" value="true"/>
+    <preference name="debug" value="true"/>
+    <preference name="iOS7StatusBarAppearance" value="true"/>
+    <permission name="readPhoneState"/>
+    <permission name="camera"/>
+    <permission name="record"/>
+    <permission name="location"/>
+    <permission name="fileSystem"/>
+    <permission name="internet"/>
+    <permission name="webBrowser"/>
+    <permission name="bootCompleted"/>
+    <permission name="hardware"/>
+    <preference name="softInputMode" value="resize"/>
+    <feature name="qq">
+        <param name="urlScheme" value="tencent101064640"/>
+        <param name="apiKey" value="101064640"/>
+    </feature>
+    <feature name="wx">
+        <param name="urlScheme" value="wxd0d84bbf23b4a0e4"/>
+        <param name="apiKey" value="wxd0d84bbf23b4a0e4"/>
+        <param name="apiSecret" value="a354f72aa1b4c2b8eaad137ac81434cd"/>
+    </feature>
+    <feature name="smsVerify">
+        <param name="android_app_key" value="24e86c0881ca5"/>
+        <param name="android_app_secret" value="60025b02e339933a19111f9a81cf9b29"/>
+        <param name="ios_app_key" value="24e871ba4ce48"/>
+        <param name="ios_app_secret" value="db17a2a1339a3443a5e92396b72be92a"/>
+    </feature>
+    <feature name="bMap">
+        <param name="android_api_key" value="f7Is0dWLom2q6rV3ZfFPZ1aa"/>
+        <param name="ios_api_key" value="81qz3dBYB5q2nGji4IYrawr1"/>
+    </feature>
+</widget>

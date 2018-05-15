@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+        <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+        <title>ad</title>
+        <link rel="stylesheet" type="text/css" href="../css/api.css" />
+        <style type="text/css">
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+                background-color: #FFFFFF;
+            }
+            
+            .title {
+                width: 100%;
+                text-align: center;
+                line-height: 45px;
+                border-bottom: 1px solid #EEEEEE;
+            }
+            
+            .back {
+                position: absolute;
+                top: 0;
+                height: 45px;
+                width: 45px;
+                background: url('../image/shouye/back-black.png') no-repeat;
+                -webkit-background-size: 18px 18px;
+                background-size: 18px 18px;
+                background-position: center center;
+            }
+            
+            .edit {
+                position: absolute;
+                top: 0;
+                right: 10px;
+                height: 45px;
+                width: 45px;
+                line-height: 45px;
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="title" id="header">我的收藏</div>
+        <div class="back event-back"></div>
+        <div class="edit">编辑</div>
+    </body>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/common.js"></script>
+    <script type="text/javascript">
+        apiready = function() {
+            fnReady();
+            fnReadyFrame();
+        };
+    </script>
+    </script>
+
+</html>
